@@ -567,8 +567,28 @@ body {
   outline: none;
   border-color: var(--accent);
 }
-.task-edit-row2 { display: flex; gap: 8px; }
-.task-edit-date { flex: 1; }
+.task-edit-row2 { display: flex; gap: 8px; flex-direction: column; }
+.task-edit-date-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.task-edit-date-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+.task-edit-date {
+  flex: 1;
+  font-size: 15px !important;
+  padding: 10px 12px !important;
+  border-color: var(--accent) !important;
+  background: #5b8af510 !important;
+  color: var(--text) !important;
+}
+.task-edit-date:focus { border-color: var(--accent) !important; box-shadow: 0 0 0 2px var(--accent-glow); }
 .task-edit-cat { flex: 1; }
 .task-edit-note { resize: vertical; min-height: 50px; }
 .task-edit-actions { display: flex; gap: 8px; }
@@ -647,10 +667,29 @@ body {
 }
 .quick-add-input { width: 100%; }
 .quick-add-input:focus, .quick-add-date:focus, .quick-add-cat:focus { outline: none; border-color: var(--accent); }
-.quick-add-row2 { display: flex; gap: 8px; align-items: center; }
-.quick-add-date { flex: 1; }
+.quick-add-date-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+.quick-add-date-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+.quick-add-date {
+  width: 100%;
+  font-size: 14px !important;
+  padding: 9px 12px !important;
+  border-color: var(--accent) !important;
+  background: #5b8af510 !important;
+}
+.quick-add-row2 { display: flex; gap: 8px; align-items: flex-end; }
 .quick-add-cat { flex: 1; }
-.quick-add-critical { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text2); cursor: pointer; white-space: nowrap; }
+.quick-add-critical { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text2); cursor: pointer; white-space: nowrap; padding-bottom: 9px; }
 .quick-add-critical input { cursor: pointer; accent-color: var(--warning); }
 .quick-add-actions { display: flex; gap: 8px; }
 .btn-add-task {
@@ -810,6 +849,166 @@ body {
 .empty-icon { font-size: 52px; margin-bottom: 16px; }
 .empty-state h2 { font-family: var(--font-head); font-size: 22px; font-weight: 700; margin-bottom: 8px; }
 .empty-state p { color: var(--text2); }
+
+/* ── Upcoming Deadlines panel ────────────────────────────── */
+.deadlines-panel {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 24px;
+}
+.deadlines-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.deadlines-icon { font-size: 18px; }
+.deadlines-title {
+  font-family: var(--font-head);
+  font-size: 15px;
+  font-weight: 700;
+  flex: 1;
+}
+.deadlines-list { display: flex; flex-direction: column; gap: 6px; }
+.deadline-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 9px 12px;
+  border-left: 3px solid transparent;
+}
+.deadline-item-left { flex: 1; min-width: 0; }
+.deadline-task-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.deadline-case-name {
+  font-size: 11px;
+  color: var(--text3);
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.deadline-case-name .misc-label { color: var(--text3); font-style: italic; }
+.deadline-badge-col { flex-shrink: 0; }
+
+/* ── Dashboard capture bar ───────────────────────────────── */
+.dashboard-capture-bar {
+  margin-bottom: 20px;
+}
+.dashboard-capture-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  background: var(--bg2);
+  border: 1px dashed var(--border-bright);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  color: var(--text3);
+  font-size: 15px;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.18s;
+  text-align: left;
+}
+.dashboard-capture-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-glow);
+}
+.dashboard-capture-plus {
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--accent);
+  line-height: 1;
+}
+
+/* ── Floating capture button ─────────────────────────────── */
+.floating-capture-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(91, 138, 245, 0.5);
+  transition: all 0.18s;
+  z-index: 150;
+}
+.floating-capture-btn:hover {
+  background: #4a79e4;
+  transform: scale(1.1);
+  box-shadow: 0 6px 28px rgba(91, 138, 245, 0.7);
+}
+.floating-plus {
+  font-size: 30px;
+  font-weight: 300;
+  color: white;
+  line-height: 1;
+  margin-top: -2px;
+}
+
+/* ── Global capture modal extras ─────────────────────────── */
+.capture-modal { max-width: 440px; }
+.capture-input {
+  font-size: 16px !important;
+  padding: 12px 14px !important;
+}
+.modal-subtitle {
+  color: var(--text3);
+  font-size: 13px;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+.capture-critical-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text2);
+  cursor: pointer;
+  margin-top: 4px;
+}
+.capture-critical-row input { cursor: pointer; accent-color: var(--warning); }
+
+/* ── Misc panel ──────────────────────────────────────────── */
+.misc-panel {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 24px;
+}
+.misc-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.misc-icon { font-size: 18px; }
+.misc-title {
+  font-family: var(--font-head);
+  font-size: 15px;
+  font-weight: 700;
+  flex: 1;
+}
 
 /* ── Scrollbar ───────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; }
