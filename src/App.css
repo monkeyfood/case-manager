@@ -125,12 +125,14 @@ body {
 /* ── Two-column dashboard layout ─────────────────────────── */
 .dashboard-layout {
   display: grid;
-  grid-template-columns: 1fr 320px;
+  grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
   gap: 20px;
   align-items: start;
+  width: 100%;
+  max-width: 100%;
 }
-.dashboard-main { display: flex; flex-direction: column; gap: 16px; }
-.dashboard-sidebar { display: flex; flex-direction: column; gap: 14px; position: sticky; top: 116px; }
+.dashboard-main { display: flex; flex-direction: column; gap: 16px;min-width: 0; }
+.dashboard-sidebar { display: flex; flex-direction: column; gap: 14px; position: sticky; top: 116px; min-width: 0;}
 
 /* ── Sidebar panels ──────────────────────────────────────── */
 .sidebar-panel {
