@@ -57,10 +57,23 @@ body {
 
 /* ── Top header ──────────────────────────────────────────── */
 .app-header {
+  padding-top: calc(16px + env(safe-area-inset-top));
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 16px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+
+  position: sticky;
+  top: 0;
+  z-index: 100; ; box-shadow: var(--shadow);
   background: var(--bg-white); border-bottom: 1px solid var(--border);
-  padding: 0 28px; display: flex; align-items: center;
+  display: flex; align-items: center;
   justify-content: space-between; height: 56px;
-  position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow);
+  
 }
 .header-left { display: flex; align-items: center; gap: 12px; }
 .app-logo-text { font-size: 18px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; line-height: 1.2; }
