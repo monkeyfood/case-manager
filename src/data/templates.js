@@ -1,293 +1,639 @@
 // Default task templates based on common legal workflows
 // Customize these to match your actual practice
 
-export const LITIGATION_TASKS = [
-  { id: 'lit_1', title: 'Run conflict check', category: 'Admin', defaultDaysFromOpen: 1, critical: true },
-  { id: 'lit_2', title: 'Document conflict clearance', category: 'Admin', defaultDaysFromOpen: 1, critical: true },
-  { id: 'lit_3', title: 'Open internal file', category: 'Admin', defaultDaysFromOpen: 1, critical: true },
-  { id: 'lit_4', title: 'Create matter folder', category: 'Admin', defaultDaysFromOpen: 1, critical: false },
-  { id: 'lit_5', title: 'Save complaint, summons, assignment materials, claim file, policy, and prior correspondence', category: 'Admin', defaultDaysFromOpen: 1, critical: true },
-  { id: 'lit_6', title: 'Confirm receipt of assignment materials', category: 'Admin', defaultDaysFromOpen: 1, critical: true },
-  { id: 'lit_7', title: 'Identify client, carrier, insured, claim number, policy number, date of loss, and suit filing date', category: 'Admin', defaultDaysFromOpen: 1, critical: true },
-  { id: 'lit_8', title: 'Confirm matter type and defense posture', category: 'Insurance', defaultDaysFromOpen: 1, critical: true },
-  { id: 'lit_9', title: 'Confirm client reporting and billing contacts', category: 'Insurance', defaultDaysFromOpen: 2, critical: false },
-  { id: 'lit_10', title: 'Review litigation guidelines', category: 'Insurance', defaultDaysFromOpen: 2, critical: true },
-  { id: 'lit_11', title: 'Calendar all known deadlines', category: 'Deadline', defaultDaysFromOpen: 1, critical: true },
-  { id: 'lit_12', title: 'Conduct initial deadline review', category: 'Deadline', defaultDaysFromOpen: 1, critical: true },
-  { id: 'lit_13', title: 'Calendar answer deadline', category: 'Deadline', defaultDaysFromOpen: 1, critical: true },
-  { id: 'lit_14', title: 'Calendar internal answer draft deadline', category: 'Deadline', defaultDaysFromOpen: 1, critical: true },
-  { id: 'lit_15', title: 'Calendar client reporting deadline', category: 'Deadline', defaultDaysFromOpen: 1, critical: true },
-  { id: 'lit_16', title: 'Calendar deadline to evaluate removal, venue, jurisdiction, service, and responsive motions', category: 'Deadline', defaultDaysFromOpen: 1, critical: true },
-  { id: 'lit_17', title: 'Review complaint', category: 'Pleadings', defaultDaysFromOpen: 2, critical: true },
-  { id: 'lit_18', title: 'Identify parties, causes of action, damages, and special allegations', category: 'Pleadings', defaultDaysFromOpen: 2, critical: true },
-  { id: 'lit_19', title: 'Identify admitted, denied, unknown, conclusory, unsupported, inconsistent, or defective allegations', category: 'Pleadings', defaultDaysFromOpen: 3, critical: false },
-  { id: 'lit_20', title: 'Review service', category: 'Pleadings', defaultDaysFromOpen: 2, critical: true },
-  { id: 'lit_21', title: 'Evaluate service defects and whether to preserve service defenses or move to dismiss', category: 'Pleadings', defaultDaysFromOpen: 3, critical: true },
-  { id: 'lit_22', title: 'Review jurisdiction and venue', category: 'Pleadings', defaultDaysFromOpen: 3, critical: true },
-  { id: 'lit_23', title: 'Evaluate removal, transfer, dismissal, or venue objection', category: 'Pleadings', defaultDaysFromOpen: 4, critical: true },
-  { id: 'lit_24', title: 'Review statute of limitations and condition precedent issues', category: 'Pleadings', defaultDaysFromOpen: 4, critical: true },
-  { id: 'lit_25', title: 'Review policy and coverage materials', category: 'Insurance', defaultDaysFromOpen: 4, critical: true },
-  { id: 'lit_26', title: 'Identify policy limits, exclusions, conditions, notice requirements, cooperation requirements, and UM/UIM issues', category: 'Insurance', defaultDaysFromOpen: 5, critical: true },
-  { id: 'lit_27', title: 'Confirm reservation of rights or coverage issues requiring separate reporting', category: 'Insurance', defaultDaysFromOpen: 5, critical: true },
-  { id: 'lit_28', title: 'Send acknowledgment letter or email to client', category: 'Insurance', defaultDaysFromOpen: 2, critical: true },
-  { id: 'lit_29', title: 'Request missing claim file materials from client', category: 'Insurance', defaultDaysFromOpen: 2, critical: false },
-  { id: 'lit_30', title: 'Contact insured or defendant', category: 'Admin', defaultDaysFromOpen: 3, critical: true },
-  { id: 'lit_31', title: 'Send introduction letter or email to insured or defendant', category: 'Admin', defaultDaysFromOpen: 3, critical: false },
-  { id: 'lit_32', title: 'Explain representation, duty to cooperate, preservation obligations, and litigation process to insured', category: 'Admin', defaultDaysFromOpen: 4, critical: true },
-  { id: 'lit_33', title: 'Request documents, photos, texts, emails, dash cam, phone records, social media posts, witness information, and prior statements from insured', category: 'Investigation', defaultDaysFromOpen: 4, critical: false },
-  { id: 'lit_34', title: 'Schedule initial insured call', category: 'Admin', defaultDaysFromOpen: 4, critical: true },
-  { id: 'lit_35', title: 'Conduct initial insured interview', category: 'Investigation', defaultDaysFromOpen: 7, critical: true },
-  { id: 'lit_36', title: 'Document initial insured interview summary', category: 'Investigation', defaultDaysFromOpen: 8, critical: false },
-  { id: 'lit_37', title: 'Create initial case cheat sheet', category: 'Admin', defaultDaysFromOpen: 7, critical: true },
-  { id: 'lit_38', title: 'Decide response strategy', category: 'Pleadings', defaultDaysFromOpen: 7, critical: true },
-  { id: 'lit_39', title: 'Evaluate answer, motion to dismiss, motion for more definite statement, motion to strike, venue objection, service challenge, removal, third-party complaint, crossclaim, counterclaim, or tender', category: 'Pleadings', defaultDaysFromOpen: 8, critical: true },
-  { id: 'lit_40', title: 'Draft answer', category: 'Pleadings', defaultDaysFromOpen: 14, critical: true },
-  { id: 'lit_41', title: 'Draft affirmative defenses and confirm no defenses are waived', category: 'Pleadings', defaultDaysFromOpen: 14, critical: true },
-  { id: 'lit_42', title: 'Send draft answer or responsive motion to client for review if required', category: 'Insurance', defaultDaysFromOpen: 18, critical: true },
-  { id: 'lit_43', title: 'Request authority to file responsive pleading if required', category: 'Insurance', defaultDaysFromOpen: 18, critical: true },
-  { id: 'lit_44', title: 'File answer or responsive motion', category: 'Pleadings', defaultDaysFromOpen: 25, critical: true },
-  { id: 'lit_45', title: 'Save filed answer or responsive motion and service confirmation', category: 'Admin', defaultDaysFromOpen: 25, critical: false },
-  { id: 'lit_46', title: 'Update deadline chart after responsive pleading', category: 'Deadline', defaultDaysFromOpen: 26, critical: true },
-  { id: 'lit_47', title: 'Report filing to client', category: 'Insurance', defaultDaysFromOpen: 26, critical: true },
-  { id: 'lit_48', title: 'Confirm discovery timeline with client after responsive pleading', category: 'Discovery', defaultDaysFromOpen: 27, critical: false },
-  { id: 'lit_49', title: 'Obtain public records', category: 'Investigation', defaultDaysFromOpen: 14, critical: false },
-  { id: 'lit_50', title: 'Request police report, accident report, incident report, 911 records, bodycam, dashcam, citations, CAD reports, and related agency records', category: 'Investigation', defaultDaysFromOpen: 14, critical: false },
-  { id: 'lit_51', title: 'Investigate plaintiff', category: 'Investigation', defaultDaysFromOpen: 21, critical: false },
-  { id: 'lit_52', title: 'Investigate defendant or insured', category: 'Investigation', defaultDaysFromOpen: 21, critical: false },
-  { id: 'lit_53', title: 'Identify non-parties', category: 'Investigation', defaultDaysFromOpen: 21, critical: true },
-  { id: 'lit_54', title: 'Create list of medical providers, employers, insurers, witnesses, repair facilities, government agencies, surveillance sources, and expert candidates', category: 'Investigation', defaultDaysFromOpen: 21, critical: false },
-  { id: 'lit_55', title: 'Prepare initial report to client', category: 'Insurance', defaultDaysFromOpen: 30, critical: true },
-  { id: 'lit_56', title: 'Analyze initial liability, damages, coverage observations, strengths, weaknesses, missing information, budget, reserves, and next steps', category: 'Insurance', defaultDaysFromOpen: 30, critical: true },
-  { id: 'lit_57', title: 'Create litigation plan', category: 'Admin', defaultDaysFromOpen: 30, critical: true },
-  { id: 'lit_58', title: 'Break litigation plan into pleadings, written discovery, records collection, depositions, expert review, dispositive motions, settlement, and pretrial phases', category: 'Admin', defaultDaysFromOpen: 30, critical: false },
-  { id: 'lit_59', title: 'Draft interrogatories to plaintiff', category: 'Discovery', defaultDaysFromOpen: 35, critical: false },
-  { id: 'lit_60', title: 'Draft requests for production to plaintiff', category: 'Discovery', defaultDaysFromOpen: 35, critical: false },
-  { id: 'lit_61', title: 'Draft requests for admission to plaintiff', category: 'Discovery', defaultDaysFromOpen: 35, critical: false },
-  { id: 'lit_62', title: 'Target admissions regarding undisputed facts, authenticity, lack of evidence, prior conditions, treatment gaps, wage loss, punitive conduct, intentional conduct, policy limits, apportionment, and summary judgment foundation', category: 'Discovery', defaultDaysFromOpen: 35, critical: false },
-  { id: 'lit_63', title: 'Serve written discovery to plaintiff', category: 'Discovery', defaultDaysFromOpen: 40, critical: true },
-  { id: 'lit_64', title: 'Calendar plaintiff discovery response deadline', category: 'Deadline', defaultDaysFromOpen: 40, critical: true },
-  { id: 'lit_65', title: 'Calendar plaintiff discovery deficiency review date', category: 'Deadline', defaultDaysFromOpen: 40, critical: true },
-  { id: 'lit_66', title: 'Save served discovery requests', category: 'Discovery', defaultDaysFromOpen: 40, critical: false },
-  { id: 'lit_67', title: 'Review plaintiff discovery requests', category: 'Discovery', defaultDaysFromOpen: 35, critical: true },
-  { id: 'lit_68', title: 'Calendar deadline to respond to plaintiff discovery requests', category: 'Deadline', defaultDaysFromOpen: 35, critical: true },
-  { id: 'lit_69', title: 'Calendar internal draft deadline for defendant discovery responses', category: 'Deadline', defaultDaysFromOpen: 35, critical: true },
-  { id: 'lit_70', title: 'Identify objections, responsive documents, privileged materials, and overbroad requests', category: 'Discovery', defaultDaysFromOpen: 40, critical: false },
-  { id: 'lit_71', title: 'Collect responsive information from insured and client', category: 'Discovery', defaultDaysFromOpen: 45, critical: true },
-  { id: 'lit_72', title: 'Send discovery questionnaire to insured or client', category: 'Discovery', defaultDaysFromOpen: 45, critical: false },
-  { id: 'lit_73', title: 'Review claim file for responsive non-privileged materials', category: 'Discovery', defaultDaysFromOpen: 45, critical: false },
-  { id: 'lit_74', title: 'Identify privileged materials and prepare privilege log if needed', category: 'Discovery', defaultDaysFromOpen: 50, critical: false },
-  { id: 'lit_75', title: 'Draft defendant discovery responses', category: 'Discovery', defaultDaysFromOpen: 55, critical: true },
-  { id: 'lit_76', title: 'Prepare verification for defendant discovery responses if required', category: 'Discovery', defaultDaysFromOpen: 58, critical: true },
-  { id: 'lit_77', title: 'Finalize and serve defendant discovery responses', category: 'Discovery', defaultDaysFromOpen: 60, critical: true },
-  { id: 'lit_78', title: 'Calendar supplementation deadlines', category: 'Deadline', defaultDaysFromOpen: 60, critical: true },
-  { id: 'lit_79', title: 'Report defendant discovery responses to client', category: 'Insurance', defaultDaysFromOpen: 61, critical: false },
-  { id: 'lit_80', title: 'Review plaintiff discovery responses', category: 'Discovery', defaultDaysFromOpen: 75, critical: true },
-  { id: 'lit_81', title: 'Identify admissions, evasive answers, missing documents, objection-only responses, new providers, employers, witnesses, prior claims, or injuries', category: 'Discovery', defaultDaysFromOpen: 76, critical: false },
-  { id: 'lit_82', title: 'Update chronology and damages summary based on plaintiff discovery responses', category: 'Damages', defaultDaysFromOpen: 78, critical: false },
-  { id: 'lit_83', title: 'Create discovery deficiency chart', category: 'Discovery', defaultDaysFromOpen: 80, critical: false },
-  { id: 'lit_84', title: 'Send discovery deficiency letter', category: 'Discovery', defaultDaysFromOpen: 85, critical: true },
-  { id: 'lit_85', title: 'Calendar plaintiff deficiency response deadline', category: 'Deadline', defaultDaysFromOpen: 85, critical: true },
-  { id: 'lit_86', title: 'Follow up on discovery deficiencies', category: 'Discovery', defaultDaysFromOpen: 100, critical: false },
-  { id: 'lit_87', title: 'Confer with opposing counsel regarding discovery deficiencies if responses remain inadequate', category: 'Discovery', defaultDaysFromOpen: 105, critical: false },
-  { id: 'lit_88', title: 'File motion to compel if needed', category: 'Motions', defaultDaysFromOpen: 115, critical: true },
-  { id: 'lit_89', title: 'Calendar motion to compel hearing if needed', category: 'Deadline', defaultDaysFromOpen: 116, critical: true },
-  { id: 'lit_90', title: 'Build non-party subpoena list', category: 'Medical', defaultDaysFromOpen: 50, critical: true },
-  { id: 'lit_91', title: 'Identify medical providers, imaging centers, pharmacies, prior doctors, employers, insurers, prior claim carriers, workers compensation carriers, government agencies, and surveillance custodians', category: 'Medical', defaultDaysFromOpen: 50, critical: false },
-  { id: 'lit_92', title: 'Prepare authorizations if needed', category: 'Medical', defaultDaysFromOpen: 55, critical: false },
-  { id: 'lit_93', title: 'Request HIPAA, employment, tax, pharmacy, and insurance authorizations if needed', category: 'Medical', defaultDaysFromOpen: 55, critical: false },
-  { id: 'lit_94', title: 'Track whether plaintiff refuses or limits authorizations', category: 'Medical', defaultDaysFromOpen: 60, critical: false },
-  { id: 'lit_95', title: 'Serve notices and subpoenas for non-party records', category: 'Medical', defaultDaysFromOpen: 65, critical: true },
-  { id: 'lit_96', title: 'Calendar non-party records production deadlines', category: 'Deadline', defaultDaysFromOpen: 65, critical: true },
-  { id: 'lit_97', title: 'Follow up on outstanding non-party records', category: 'Medical', defaultDaysFromOpen: 85, critical: false },
-  { id: 'lit_98', title: 'Track outstanding record requests and reissue subpoenas if defective', category: 'Medical', defaultDaysFromOpen: 90, critical: false },
-  { id: 'lit_99', title: 'Review incoming medical and non-party records', category: 'Medical', defaultDaysFromOpen: 95, critical: true },
-  { id: 'lit_100', title: 'Save records by provider and date', category: 'Medical', defaultDaysFromOpen: 95, critical: false },
-  { id: 'lit_101', title: 'OCR records if needed', category: 'Medical', defaultDaysFromOpen: 96, critical: false },
-  { id: 'lit_102', title: 'Create medical record index', category: 'Medical', defaultDaysFromOpen: 100, critical: false },
-  { id: 'lit_103', title: 'Identify prior similar complaints, degenerative findings, treatment gaps, inconsistent histories, alternative causes, medication history, prior accidents, subsequent accidents, work restrictions, disability claims, causation opinions, and billing irregularities', category: 'Medical', defaultDaysFromOpen: 105, critical: false },
-  { id: 'lit_104', title: 'Update medical chronology', category: 'Medical', defaultDaysFromOpen: 110, critical: true },
-  { id: 'lit_105', title: 'Report important records to client', category: 'Insurance', defaultDaysFromOpen: 115, critical: false },
-  { id: 'lit_106', title: 'Create treatment chronology', category: 'Medical', defaultDaysFromOpen: 120, critical: true },
-  { id: 'lit_107', title: 'Chart date of service, provider, complaint, history, diagnosis, treatment, imaging, objective findings, subjective complaints, work restrictions, causation statements, billing, and defense issues', category: 'Medical', defaultDaysFromOpen: 120, critical: false },
-  { id: 'lit_108', title: 'Create pre-existing condition chart', category: 'Medical', defaultDaysFromOpen: 125, critical: true },
-  { id: 'lit_109', title: 'Chart prior injuries, body parts, imaging, surgeries, medications, pain complaints, disability claims, symptoms, providers, and treatment gaps', category: 'Medical', defaultDaysFromOpen: 125, critical: false },
-  { id: 'lit_110', title: 'Create post-incident causation chart', category: 'Medical', defaultDaysFromOpen: 130, critical: true },
-  { id: 'lit_111', title: 'Analyze first complaint, delay in treatment, mechanism, objective findings, degeneration, alternative causes, inconsistent histories, escalation, gaps, subsequent injuries, provider causation opinions, and weaknesses', category: 'Medical', defaultDaysFromOpen: 130, critical: false },
-  { id: 'lit_112', title: 'Analyze claimed specials', category: 'Damages', defaultDaysFromOpen: 135, critical: true },
-  { id: 'lit_113', title: 'Analyze medical bills, paid amounts, write-offs, liens, health insurance payments, medical funding, reasonableness, necessity, relatedness, future care, lost wages, earning capacity, and out-of-pocket expenses', category: 'Damages', defaultDaysFromOpen: 135, critical: false },
-  { id: 'lit_114', title: 'Determine deposition plan', category: 'Discovery', defaultDaysFromOpen: 90, critical: true },
-  { id: 'lit_115', title: 'Prioritize plaintiff, defendant, eyewitnesses, treating doctors, corporate representatives, experts, investigating officer, EMS/fire, employer witnesses, family/friends, and records custodians', category: 'Discovery', defaultDaysFromOpen: 90, critical: false },
-  { id: 'lit_116', title: 'Prepare for plaintiff deposition', category: 'Discovery', defaultDaysFromOpen: 120, critical: true },
-  { id: 'lit_117', title: 'Review pleadings, discovery responses, medical records, prior claims, social media, employment records, and incident evidence before plaintiff deposition', category: 'Discovery', defaultDaysFromOpen: 120, critical: false },
-  { id: 'lit_118', title: 'Prepare plaintiff deposition exhibit list', category: 'Discovery', defaultDaysFromOpen: 125, critical: false },
-  { id: 'lit_119', title: 'Prepare plaintiff deposition outline', category: 'Discovery', defaultDaysFromOpen: 125, critical: true },
-  { id: 'lit_120', title: 'Include plaintiff deposition topics for background, education, employment, prior medical history, prior accidents, incident facts, liability, witnesses, statements, symptoms, treatment, gaps, prior complaints, subsequent injuries, activities, work limits, daily activities, damages, bills, medications, surgery, future care, social media, discovery responses, demand allegations, and punitive or fee basis', category: 'Discovery', defaultDaysFromOpen: 125, critical: false },
-  { id: 'lit_121', title: 'Schedule depositions', category: 'Discovery', defaultDaysFromOpen: 100, critical: true },
-  { id: 'lit_122', title: 'Coordinate deposition dates', category: 'Discovery', defaultDaysFromOpen: 100, critical: false },
-  { id: 'lit_123', title: 'Notice depositions', category: 'Discovery', defaultDaysFromOpen: 105, critical: true },
-  { id: 'lit_124', title: 'Reserve court reporter, videographer, interpreter, location, and remote link as needed', category: 'Discovery', defaultDaysFromOpen: 105, critical: false },
-  { id: 'lit_125', title: 'Serve deposition subpoena if witness is a non-party', category: 'Discovery', defaultDaysFromOpen: 105, critical: true },
-  { id: 'lit_126', title: 'Prepare insured or defendant for deposition', category: 'Discovery', defaultDaysFromOpen: 130, critical: true },
-  { id: 'lit_127', title: 'Review facts, pleadings, prior statements, discovery responses, exhibits, likely plaintiff themes, answer technique, demeanor, and logistics with insured or defendant', category: 'Discovery', defaultDaysFromOpen: 130, critical: false },
-  { id: 'lit_128', title: 'Take deposition', category: 'Discovery', defaultDaysFromOpen: 140, critical: true },
-  { id: 'lit_129', title: 'Lock down testimony, obtain admissions, explore inconsistencies, preserve summary judgment points, preserve impeachment, explore damages, causation, alternative causes, lack of evidence, and follow-up questions', category: 'Discovery', defaultDaysFromOpen: 140, critical: false },
-  { id: 'lit_130', title: 'Complete post-deposition tasks', category: 'Discovery', defaultDaysFromOpen: 145, critical: true },
-  { id: 'lit_131', title: 'Save transcript, summarize key testimony, identify errata deadline, calendar transcript review, pull impeachment excerpts, update liability and damages assessment, send deposition report, identify follow-up discovery, and evaluate dispositive motion potential', category: 'Discovery', defaultDaysFromOpen: 145, critical: false },
-  { id: 'lit_132', title: 'Determine whether expert is needed', category: 'Experts', defaultDaysFromOpen: 120, critical: true },
-  { id: 'lit_133', title: 'Consider medical causation, biomechanics, accident reconstruction, human factors, premises safety, engineering, standard of care, billing reasonableness, life care planning, vocational/economic damages, fire/theft/fraud, product defect, weather, roadway, and toxicology experts', category: 'Experts', defaultDaysFromOpen: 120, critical: false },
-  { id: 'lit_134', title: 'Obtain client authority for expert', category: 'Experts', defaultDaysFromOpen: 130, critical: true },
-  { id: 'lit_135', title: 'Retain consulting expert', category: 'Experts', defaultDaysFromOpen: 140, critical: true },
-  { id: 'lit_136', title: 'Send engagement letter, confirm rates, confirm conflict check, send materials, and identify specific expert questions', category: 'Experts', defaultDaysFromOpen: 140, critical: false },
-  { id: 'lit_137', title: 'Conduct expert consult', category: 'Experts', defaultDaysFromOpen: 155, critical: false },
-  { id: 'lit_138', title: 'Discuss strengths, weaknesses, defense opinions, additional materials, consulting versus testifying role, and discoverability concerns with expert', category: 'Experts', defaultDaysFromOpen: 155, critical: false },
-  { id: 'lit_139', title: 'Prepare expert report or disclosure', category: 'Experts', defaultDaysFromOpen: 180, critical: true },
-  { id: 'lit_140', title: 'Calendar expert disclosure deadline', category: 'Deadline', defaultDaysFromOpen: 160, critical: true },
-  { id: 'lit_141', title: 'Obtain final expert opinions and review report for factual accuracy and support', category: 'Experts', defaultDaysFromOpen: 180, critical: true },
-  { id: 'lit_142', title: 'Serve expert disclosure', category: 'Experts', defaultDaysFromOpen: 185, critical: true },
-  { id: 'lit_143', title: 'Prepare expert for deposition', category: 'Experts', defaultDaysFromOpen: 200, critical: true },
-  { id: 'lit_144', title: 'Depose opposing expert', category: 'Experts', defaultDaysFromOpen: 210, critical: false },
-  { id: 'lit_145', title: 'Obtain opposing expert file, review report, research expert, review prior testimony, identify methodology issues, assumptions, and missing facts, prepare cross outline, and evaluate Daubert or motion to exclude', category: 'Experts', defaultDaysFromOpen: 210, critical: false },
-  { id: 'lit_146', title: 'Evaluate settlement posture', category: 'Negotiation', defaultDaysFromOpen: 150, critical: true },
-  { id: 'lit_147', title: 'Review liability, damages, venue, plaintiff credibility, medical causation, specials, verdict risk, defense costs, policy limits, liens, and prior negotiations', category: 'Negotiation', defaultDaysFromOpen: 150, critical: false },
-  { id: 'lit_148', title: 'Prepare settlement report', category: 'Negotiation', defaultDaysFromOpen: 165, critical: true },
-  { id: 'lit_149', title: 'Analyze procedural posture, liability, damages, medical summary, defense strengths, weaknesses, jury risk, verdict range, settlement value, authority, and mediation recommendation', category: 'Negotiation', defaultDaysFromOpen: 165, critical: false },
-  { id: 'lit_150', title: 'Prepare for mediation', category: 'Negotiation', defaultDaysFromOpen: 180, critical: true },
-  { id: 'lit_151', title: 'Obtain mediation authority', category: 'Negotiation', defaultDaysFromOpen: 180, critical: true },
-  { id: 'lit_152', title: 'Select mediator and schedule mediation', category: 'Negotiation', defaultDaysFromOpen: 180, critical: true },
-  { id: 'lit_153', title: 'Prepare mediation statement, exhibits, damages chart, chronology, confidential statement, and client or insured preparation', category: 'Negotiation', defaultDaysFromOpen: 195, critical: true },
-  { id: 'lit_154', title: 'Conduct mediation', category: 'Negotiation', defaultDaysFromOpen: 210, critical: true },
-  { id: 'lit_155', title: 'Present defense themes, use demonstratives, identify causation and damages weaknesses, track offers and demands, communicate with client, confirm authority, and document final numbers', category: 'Negotiation', defaultDaysFromOpen: 210, critical: false },
-  { id: 'lit_156', title: 'Prepare post-mediation report', category: 'Negotiation', defaultDaysFromOpen: 211, critical: true },
-  { id: 'lit_157', title: 'Report mediation outcome, identify last demand and offer, summarize mediator feedback, recommend next move, calendar settlement deadlines, and update litigation plan if not settled', category: 'Negotiation', defaultDaysFromOpen: 211, critical: false },
-
-  { id: 'lit_158', title: 'Identify motion opportunities', category: 'Motions', defaultDaysFromOpen: 170, critical: true },
-  { id: 'lit_159', title: 'Evaluate summary judgment, partial summary judgment, punitive damages, attorney fees, negligent entrustment/hiring/training, causation, damages, expert exclusion, motions in limine, IME, discovery enforcement, and sanctions motions', category: 'Motions', defaultDaysFromOpen: 170, critical: false },
-  { id: 'lit_160', title: 'Build summary judgment record', category: 'Motions', defaultDaysFromOpen: 190, critical: true },
-  { id: 'lit_161', title: 'Identify required elements, plaintiff evidence, missing evidence, deposition excerpts, discovery admissions, medical record excerpts, expert opinions, affidavits, admissibility issues, statement of material facts, and exhibit numbering', category: 'Motions', defaultDaysFromOpen: 190, critical: false },
-  { id: 'lit_162', title: 'Draft dispositive or pretrial motion', category: 'Motions', defaultDaysFromOpen: 215, critical: true },
-  { id: 'lit_163', title: 'Draft issue statement, facts, legal standard, element-by-element argument, record citations, response to expected plaintiff arguments, proposed order, and evidentiary review', category: 'Motions', defaultDaysFromOpen: 215, critical: false },
-  { id: 'lit_164', title: 'File dispositive or pretrial motion', category: 'Motions', defaultDaysFromOpen: 240, critical: true },
-  { id: 'lit_165', title: 'Calendar response and reply deadlines for dispositive or pretrial motion', category: 'Deadline', defaultDaysFromOpen: 240, critical: true },
-  { id: 'lit_166', title: 'Report dispositive or pretrial motion filing to client', category: 'Insurance', defaultDaysFromOpen: 241, critical: true },
-  { id: 'lit_167', title: 'Prepare reply and hearing materials', category: 'Motions', defaultDaysFromOpen: 260, critical: true },
-  { id: 'lit_168', title: 'Review response, identify misstatements and unsupported assertions, draft reply, prepare hearing outline, key case law sheet, record citation sheet, and proposed order', category: 'Motions', defaultDaysFromOpen: 260, critical: false },
+export const PRELITIGATION_TASKS = [
+  { id: 'pl_1', title: 'Open file & conflict check', category: 'Admin', defaultDaysFromOpen: 1, critical: true },
+  { id: 'pl_2', title: 'Sign retainer agreement', category: 'Admin', defaultDaysFromOpen: 3, critical: true },
+  { id: 'pl_3', title: 'Request medical records', category: 'Medical', defaultDaysFromOpen: 5, critical: true },
+  { id: 'pl_4', title: 'Request police/incident report', category: 'Investigation', defaultDaysFromOpen: 5, critical: false },
+  { id: 'pl_5', title: 'Photograph injuries / scene', category: 'Investigation', defaultDaysFromOpen: 7, critical: false },
+  { id: 'pl_6', title: 'Send letter of representation to insurer', category: 'Insurance', defaultDaysFromOpen: 7, critical: true },
+  { id: 'pl_7', title: 'Notify health insurer / lien holders', category: 'Insurance', defaultDaysFromOpen: 10, critical: false },
+  { id: 'pl_8', title: 'Follow up on medical records request', category: 'Medical', defaultDaysFromOpen: 30, critical: false },
+  { id: 'pl_9', title: 'Review medical records received', category: 'Medical', defaultDaysFromOpen: 45, critical: false },
+  { id: 'pl_10', title: 'Request billing records', category: 'Medical', defaultDaysFromOpen: 45, critical: false },
+  { id: 'pl_11', title: 'Obtain wage loss documentation', category: 'Damages', defaultDaysFromOpen: 45, critical: false },
+  { id: 'pl_12', title: 'Prepare demand package', category: 'Negotiation', defaultDaysFromOpen: 90, critical: true },
+  { id: 'pl_13', title: 'Send demand letter', category: 'Negotiation', defaultDaysFromOpen: 95, critical: true },
+  { id: 'pl_14', title: 'Follow up on demand if no response', category: 'Negotiation', defaultDaysFromOpen: 125, critical: false },
+  { id: 'pl_15', title: 'Evaluate settlement offer / advise client', category: 'Negotiation', defaultDaysFromOpen: 135, critical: false },
+  { id: 'pl_16', title: 'Review statute of limitations deadline', category: 'Deadline', defaultDaysFromOpen: 180, critical: true },
 ];
 
-export const PRELITIGATION_TASKS = [
-  { id: 'prelit_1', title: 'Confirm receipt of assignment', category: 'Admin', defaultDaysFromOpen: 1, critical: true },
-  { id: 'prelit_2', title: 'Save assignment email and attachments', category: 'Admin', defaultDaysFromOpen: 1, critical: false },
-  { id: 'prelit_3', title: 'Identify carrier, claim number, policy number, insured or claimant name, date of loss, claim type, coverage involved, adjuster contact, and reason for referral', category: 'Admin', defaultDaysFromOpen: 1, critical: true },
-  { id: 'prelit_4', title: 'Determine whether assignment involves coverage investigation, suspected fraud, cooperation issue, stolen vehicle, fire loss, property loss, UM/UIM claim, medical payments, bodily injury, misrepresentation, late notice, EUO only, or pre-suit defense investigation', category: 'Insurance', defaultDaysFromOpen: 1, critical: true },
-  { id: 'prelit_5', title: 'Open file and organize materials', category: 'Admin', defaultDaysFromOpen: 1, critical: true },
-  { id: 'prelit_6', title: 'Review client instructions', category: 'Insurance', defaultDaysFromOpen: 2, critical: true },
-  { id: 'prelit_7', title: 'Determine scope of assignment and whether role is coverage advice, fact investigation, EUO handling, or pre-suit defense investigation', category: 'Insurance', defaultDaysFromOpen: 2, critical: true },
-  { id: 'prelit_8', title: 'Identify reporting deadline, litigation risk, communication protocol with insured or claimant, and special handling requirements', category: 'Insurance', defaultDaysFromOpen: 2, critical: true },
+export const LITIGATION_TASKS = [
 
-  { id: 'prelit_9', title: 'Review policy', category: 'Insurance', defaultDaysFromOpen: 3, critical: true },
-  { id: 'prelit_10', title: 'Identify named insured, additional insureds, covered property or person, policy period, limits, deductibles, insuring agreement, exclusions, conditions, and duties after loss', category: 'Insurance', defaultDaysFromOpen: 3, critical: true },
-  { id: 'prelit_11', title: 'Review cooperation clause, EUO provision, proof of loss requirement, appraisal provision, suit limitation clause, fraud provision, notice requirement, authorization requirements, and document production requirements', category: 'Insurance', defaultDaysFromOpen: 3, critical: true },
-  { id: 'prelit_12', title: 'Review claim facts', category: 'Investigation', defaultDaysFromOpen: 4, critical: true },
-  { id: 'prelit_13', title: 'Identify date and location of loss, how claim was reported, who reported claim, when claim was made, timeline between loss and notice, claimed damages or injuries, inconsistencies, prior claims, prior losses, prior litigation, prior policy issues, and relationships among involved persons', category: 'Investigation', defaultDaysFromOpen: 4, critical: true },
-  { id: 'prelit_14', title: 'Review existing claim materials', category: 'Investigation', defaultDaysFromOpen: 5, critical: true },
-  { id: 'prelit_15', title: 'Review recorded statements, photos, estimates, repair invoices, medical bills, police report, fire report, theft report, title documents, registration, loan documents, lease documents, communications, adjuster notes, SIU notes, social media screenshots, background searches, and prior demands', category: 'Investigation', defaultDaysFromOpen: 5, critical: false },
-  { id: 'prelit_16', title: 'Identify missing information', category: 'Investigation', defaultDaysFromOpen: 6, critical: true },
-  { id: 'prelit_17', title: 'Create missing-materials list for policy documents, application, declarations, underwriting file, claim notes, recorded statements, photos, estimates, repair records, police reports, medical records, employment records, financial records, phone records, receipts, proof of ownership, prior claim records, prior insurance records, and witness information', category: 'Investigation', defaultDaysFromOpen: 6, critical: false },
+  // ── A. FILE OPENING & INTAKE ───────────────────────────────────────────────
+  {
+    id: 'lit_1', title: 'Conflict check', category: 'Admin',
+    defaultDaysFromOpen: 1, critical: true,
+    subtasks: [
+      { id: 'lit_1a', title: 'Run plaintiff, defendant, insured, carrier, opposing counsel, witnesses, businesses, and related entities' },
+      { id: 'lit_1b', title: 'Confirm no prior representation conflict' },
+      { id: 'lit_1c', title: 'Confirm no coverage-position conflict if defending under reservation of rights' },
+      { id: 'lit_1d', title: 'Document conflict clearance' },
+    ]
+  },
+  {
+    id: 'lit_2', title: 'Open internal file', category: 'Admin',
+    defaultDaysFromOpen: 1, critical: true,
+    subtasks: [
+      { id: 'lit_2a', title: 'Create matter folder' },
+      { id: 'lit_2b', title: 'Save complaint, summons, assignment letter, claim file materials, policy, and any prior correspondence' },
+    ]
+  },
+  {
+    id: 'lit_3', title: 'Confirm receipt of assignment materials', category: 'Admin',
+    defaultDaysFromOpen: 1, critical: true,
+    subtasks: [
+      { id: 'lit_3a', title: 'Save assignment email and attachments to file' },
+      { id: 'lit_3b', title: 'Identify client, carrier, insured, claim number, policy number, date of loss, and suit filing date' },
+      { id: 'lit_3c', title: 'Confirm matter type: direct defense, UM defense, coverage defense, reservation of rights, or monitoring counsel' },
+      { id: 'lit_3d', title: 'Confirm who at carrier should receive reports and invoices' },
+      { id: 'lit_3e', title: 'Check whether any litigation guidelines apply' },
+      { id: 'lit_3f', title: 'Calendar all known deadlines immediately' },
+    ]
+  },
+  {
+    id: 'lit_4', title: 'Initial deadline review', category: 'Deadline',
+    defaultDaysFromOpen: 1, critical: true,
+    subtasks: [
+      { id: 'lit_4a', title: 'Identify: date complaint filed, date defendant served, answer deadline, discovery period, scheduling order deadlines, removal deadline, and any emergency hearing deadline' },
+      { id: 'lit_4b', title: 'Calendar answer deadline' },
+      { id: 'lit_4c', title: 'Calendar internal draft deadline' },
+      { id: 'lit_4d', title: 'Calendar client reporting deadline' },
+      { id: 'lit_4e', title: 'Calendar deadline to evaluate removal, venue, jurisdiction, service, and responsive motions' },
+      { id: 'lit_4f', title: 'Calendar discovery deadlines once known' },
+    ]
+  },
 
-  { id: 'prelit_18', title: 'Send initial acknowledgment or report to client', category: 'Insurance', defaultDaysFromOpen: 7, critical: true },
-  { id: 'prelit_19', title: 'Summarize assignment, materials reviewed, known facts, key issues, missing materials, recommended investigation, whether EUO appears necessary, and proposed timeline', category: 'Insurance', defaultDaysFromOpen: 7, critical: true },
-  { id: 'prelit_20', title: 'Prepare investigation plan', category: 'Investigation', defaultDaysFromOpen: 7, critical: true },
-  { id: 'prelit_21', title: 'Identify facts to confirm, records needed, witnesses to interview, authorizations needed, whether EUO should proceed, applicable deadlines, time-sensitive coverage issues, and need for reservation of rights or non-waiver agreement', category: 'Investigation', defaultDaysFromOpen: 7, critical: true },
-  { id: 'prelit_22', title: 'Determine whether reservation of rights is needed', category: 'Insurance', defaultDaysFromOpen: 8, critical: true },
-  { id: 'prelit_23', title: 'Identify potential coverage issues, determine whether carrier already sent ROR, recommend ROR if needed, avoid waiver or estoppel issues, and separate factual investigation from final coverage conclusion', category: 'Insurance', defaultDaysFromOpen: 8, critical: true },
+  // ── B. INITIAL PLEADING AND PROCEDURAL REVIEW ──────────────────────────────
+  {
+    id: 'lit_5', title: 'Review complaint', category: 'Pleadings',
+    defaultDaysFromOpen: 2, critical: true,
+    subtasks: [
+      { id: 'lit_5a', title: 'Identify all parties and all causes of action' },
+      { id: 'lit_5b', title: 'Identify damages claimed and whether punitive damages, attorney\'s fees, bad faith, negligent hiring/entrustment, vicarious liability, direct negligence, UM claims, or coverage issues are alleged' },
+      { id: 'lit_5c', title: 'Identify factual allegations that are admitted, denied, or unknown' },
+      { id: 'lit_5d', title: 'Note allegations that are conclusory, unsupported, inconsistent, or legally defective' },
+      { id: 'lit_5e', title: 'Note any allegations that may create reporting or authority issues' },
+    ]
+  },
+  {
+    id: 'lit_6', title: 'Review service', category: 'Pleadings',
+    defaultDaysFromOpen: 2, critical: true,
+    subtasks: [
+      { id: 'lit_6a', title: 'Confirm who was served, method of service, date and time of service, and whether service was on the correct defendant' },
+      { id: 'lit_6b', title: 'Confirm whether service complies with applicable rules' },
+      { id: 'lit_6c', title: 'Check for defects: wrong person, bad address, no proper agent, defective summons, late service, service after SOL, publication issues, missing return, improper acknowledgment' },
+      { id: 'lit_6d', title: 'Decide whether to preserve service defenses in answer or move to dismiss' },
+    ]
+  },
+  {
+    id: 'lit_7', title: 'Review jurisdiction and venue', category: 'Pleadings',
+    defaultDaysFromOpen: 3, critical: true,
+    subtasks: [
+      { id: 'lit_7a', title: 'Confirm subject-matter jurisdiction, personal jurisdiction, and proper venue' },
+      { id: 'lit_7b', title: 'Identify whether removal to federal court is available: check citizenship/diversity, amount in controversy, and timing' },
+      { id: 'lit_7c', title: 'Identify whether transfer, dismissal, or venue objection should be considered' },
+    ]
+  },
+  {
+    id: 'lit_8', title: 'Review statute of limitations and condition precedent issues', category: 'Pleadings',
+    defaultDaysFromOpen: 3, critical: true,
+    subtasks: [
+      { id: 'lit_8a', title: 'Determine applicable statute of limitations and compare date of loss, filing date, and service date' },
+      { id: 'lit_8b', title: 'Identify possible renewal action issues and ante-litem notice issues if government entities are involved' },
+      { id: 'lit_8c', title: 'Identify contractual limitations periods and any pre-suit notice requirements' },
+    ]
+  },
+  {
+    id: 'lit_9', title: 'Review policy and coverage materials', category: 'Insurance',
+    defaultDaysFromOpen: 4, critical: true,
+    subtasks: [
+      { id: 'lit_9a', title: 'Obtain policy if not already provided' },
+      { id: 'lit_9b', title: 'Identify named insured, additional insured issues, policy period, limits, deductible/SIR, exclusions, and conditions' },
+      { id: 'lit_9c', title: 'Identify notice requirements, cooperation requirements, and UM/UIM issues' },
+      { id: 'lit_9d', title: 'Confirm whether defense is under reservation of rights' },
+      { id: 'lit_9e', title: 'Flag issues requiring separate coverage counsel or client-only reporting' },
+    ]
+  },
 
-  { id: 'prelit_24', title: 'Conduct public records search', category: 'Investigation', defaultDaysFromOpen: 10, critical: false },
-  { id: 'prelit_25', title: 'Search court records, prior lawsuits, bankruptcy, property records, vehicle title records, business records, Secretary of State filings, criminal records if relevant, arrest or citation records, marriage/divorce/custody records if relevant, probate records, social media, prior news reports, weather data, fire/police/EMS records, building permits, code enforcement records, and tax assessor records', category: 'Investigation', defaultDaysFromOpen: 10, critical: false },
-  { id: 'prelit_26', title: 'Submit public records requests', category: 'Investigation', defaultDaysFromOpen: 10, critical: false },
-  { id: 'prelit_27', title: 'Identify agency and request incident reports, supplemental reports, photos, bodycam, dashcam, 911/CAD, fire investigation file, citation disposition, tow records, vehicle recovery records, and evidence logs', category: 'Investigation', defaultDaysFromOpen: 10, critical: false },
-  { id: 'prelit_28', title: 'Calendar public records follow-up date', category: 'Deadline', defaultDaysFromOpen: 10, critical: true },
-  { id: 'prelit_29', title: 'Save and review public records production', category: 'Investigation', defaultDaysFromOpen: 21, critical: false },
-  { id: 'prelit_30', title: 'Request authorizations', category: 'Insurance', defaultDaysFromOpen: 12, critical: true },
-  { id: 'prelit_31', title: 'Request medical, pharmacy, employment, wage/tax, financial, cell phone, vehicle, prior insurance, mortgage/lease, and utility records authorizations as needed', category: 'Insurance', defaultDaysFromOpen: 12, critical: false },
-  { id: 'prelit_32', title: 'Request documents from insured or claimant before EUO', category: 'Investigation', defaultDaysFromOpen: 12, critical: true },
-  { id: 'prelit_33', title: 'Request government ID, proof of ownership, title/registration, purchase documents, loan/lease documents, maintenance records, repair records, photos/videos, communications, receipts, bank records, tax returns if income claim, medical records if injury claim, prior claim documents, prior insurance documents, phone records, social media posts, damages documents, proof of residency, and proof of household relationships', category: 'Investigation', defaultDaysFromOpen: 12, critical: true },
-  { id: 'prelit_34', title: 'Track document production', category: 'Investigation', defaultDaysFromOpen: 14, critical: true },
-  { id: 'prelit_35', title: 'Create document production chart with requested document, request date, due date, production status, deficiency, follow-up status, importance, and use at EUO', category: 'Investigation', defaultDaysFromOpen: 14, critical: false },
+  // ── C. CLIENT AND INSURED CONTACT ──────────────────────────────────────────
+  {
+    id: 'lit_10', title: 'Send acknowledgment letter/email to client', category: 'Insurance',
+    defaultDaysFromOpen: 2, critical: true,
+    subtasks: [
+      { id: 'lit_10a', title: 'Confirm receipt of assignment and identify upcoming answer deadline' },
+      { id: 'lit_10b', title: 'Confirm initial plan: review pleadings/service, contact insured, prepare responsive pleading, evaluate early dispositive issues' },
+      { id: 'lit_10c', title: 'Request missing materials: claim file, policy, photos, recorded statements, estimates, prior demands, medicals, police report, repair records, prior correspondence' },
+      { id: 'lit_10d', title: 'Ask for billing guidelines and reporting requirements if not provided' },
+    ]
+  },
+  {
+    id: 'lit_11', title: 'Contact insured/defendant', category: 'Admin',
+    defaultDaysFromOpen: 3, critical: true,
+    subtasks: [
+      { id: 'lit_11a', title: 'Send introduction letter/email' },
+      { id: 'lit_11b', title: 'Explain representation, duty to cooperate, and ask insured to preserve evidence' },
+      { id: 'lit_11c', title: 'Request documents, photos, texts, emails, dash cam, phone records, social media posts, witness information, and prior statements' },
+      { id: 'lit_11d', title: 'Schedule initial call' },
+    ]
+  },
+  {
+    id: 'lit_12', title: 'Conduct initial insured interview', category: 'Investigation',
+    defaultDaysFromOpen: 7, critical: true,
+    subtasks: [
+      { id: 'lit_12a', title: 'Confirm identity, address, phone, email' },
+      { id: 'lit_12b', title: 'Review facts of incident, witnesses, documents, photos/videos, and prior/related incidents' },
+      { id: 'lit_12c', title: 'Identify employment relationship if relevant' },
+      { id: 'lit_12d', title: 'Identify admissions, statements, citations, arrests, claims, repairs, injuries, or damages' },
+      { id: 'lit_12e', title: 'Discuss litigation process, discovery obligations, deposition expectations' },
+      { id: 'lit_12f', title: 'Warn against direct communication with plaintiff or opposing counsel' },
+      { id: 'lit_12g', title: 'Document call summary' },
+    ]
+  },
+  {
+    id: 'lit_13', title: 'Create initial case cheat sheet', category: 'Admin',
+    defaultDaysFromOpen: 7, critical: true,
+    subtasks: [
+      { id: 'lit_13a', title: 'Include: case caption, court and judge, parties, counsel, claim number, date of loss, filing date, service date, answer deadline' },
+      { id: 'lit_13b', title: 'Include: allegations, defenses, damages claimed, key facts, key missing information, immediate deadlines, and early strategy' },
+    ]
+  },
 
-  { id: 'prelit_36', title: 'Confirm basis for EUO', category: 'EUO', defaultDaysFromOpen: 14, critical: true },
-  { id: 'prelit_37', title: 'Identify whether EUO is needed for coverage condition, inconsistent statements, missing documents, suspected fraud, ownership issue, residency issue, use or permission issue, arson or theft issue, late notice, cooperation issue, injury causation issue, damages dispute, or claim timeline clarification', category: 'EUO', defaultDaysFromOpen: 14, critical: true },
-  { id: 'prelit_38', title: 'Confirm who should appear for EUO', category: 'EUO', defaultDaysFromOpen: 15, critical: true },
-  { id: 'prelit_39', title: 'Identify potential examinees including named insured, claimant, driver, resident relative, property owner, business owner, corporate representative, spouse or household member, person who reported loss, person with ownership or possession, and person claiming injury or damages', category: 'EUO', defaultDaysFromOpen: 15, critical: false },
-  { id: 'prelit_40', title: 'Confirm policy requirements for EUO', category: 'Insurance', defaultDaysFromOpen: 15, critical: true },
-  { id: 'prelit_41', title: 'Review EUO provision, notice method, time/place requirements, document production language, sworn proof of loss requirement, carrier compliance, and whether EUO should be recorded by court reporter', category: 'Insurance', defaultDaysFromOpen: 15, critical: true },
-  { id: 'prelit_42', title: 'Select EUO date and location', category: 'EUO', defaultDaysFromOpen: 16, critical: true },
-  { id: 'prelit_43', title: 'Coordinate with adjuster or SIU, choose neutral location or remote format, consider convenience to insured or claimant, confirm court reporter, interpreter, videographer, and carrier representative attendance', category: 'EUO', defaultDaysFromOpen: 16, critical: true },
-  { id: 'prelit_44', title: 'Draft EUO demand', category: 'EUO', defaultDaysFromOpen: 17, critical: true },
-  { id: 'prelit_45', title: 'Include policy reference, claim number, date, time, location, identity of examinee, appearance requirement, document requirement, court reporter information, consequences of failure to appear or cooperate, rescheduling contact information, and professional accommodation language', category: 'EUO', defaultDaysFromOpen: 17, critical: true },
-  { id: 'prelit_46', title: 'Draft document request with EUO demand', category: 'EUO', defaultDaysFromOpen: 17, critical: true },
-  { id: 'prelit_47', title: 'Tailor EUO document request for identification documents, claim-related communications, photos/videos, receipts, invoices, ownership documents, medical records, wage records, tax records, phone records, repair or maintenance records, prior claims, prior insurance, social media posts, financial records, proof of residency, damages documents, and materials reviewed before EUO', category: 'EUO', defaultDaysFromOpen: 17, critical: false },
-  { id: 'prelit_48', title: 'Serve EUO notice', category: 'EUO', defaultDaysFromOpen: 18, critical: true },
-  { id: 'prelit_49', title: 'Send EUO notice to insured and copy client', category: 'EUO', defaultDaysFromOpen: 18, critical: true },
-  { id: 'prelit_50', title: 'Calendar EUO appearance date', category: 'Deadline', defaultDaysFromOpen: 18, critical: true },
-  { id: 'prelit_51', title: 'Calendar EUO document production deadline', category: 'Deadline', defaultDaysFromOpen: 18, critical: true },
-  { id: 'prelit_52', title: 'Calendar EUO reminder date and follow-up date', category: 'Deadline', defaultDaysFromOpen: 18, critical: true },
-  { id: 'prelit_53', title: 'Handle EUO scheduling issues', category: 'EUO', defaultDaysFromOpen: 20, critical: false },
-  { id: 'prelit_54', title: 'Evaluate rescheduling requests, offer alternate dates, document cooperation, avoid appearing unreasonable, confirm new date in writing, and send amended notice if needed', category: 'EUO', defaultDaysFromOpen: 20, critical: false },
+  // ── D. RESPONSIVE PLEADING / EARLY MOTION PRACTICE ────────────────────────
+  {
+    id: 'lit_14', title: 'Decide response strategy', category: 'Pleadings',
+    defaultDaysFromOpen: 7, critical: true,
+    subtasks: [
+      { id: 'lit_14a', title: 'Evaluate: answer, motion to dismiss, motion for more definite statement, motion to strike, venue objection, service challenge, removal to federal court' },
+      { id: 'lit_14b', title: 'Evaluate: third-party complaint, crossclaim/counterclaim, tender to another insurer or party' },
+    ]
+  },
+  {
+    id: 'lit_15', title: 'Draft answer', category: 'Pleadings',
+    defaultDaysFromOpen: 14, critical: true,
+    subtasks: [
+      { id: 'lit_15a', title: 'Respond to each numbered allegation' },
+      { id: 'lit_15b', title: 'Include affirmative defenses: failure to state a claim, comparative/contributory negligence, assumption of risk, sudden emergency, lack of causation, pre-existing conditions, failure to mitigate, intervening/superseding cause, apportionment/non-party fault, setoff, statute of limitations' },
+      { id: 'lit_15c', title: 'Include defenses for: lack of service/jurisdiction/venue if applicable, punitive damages, attorney\'s fees, and reservation of rights/coverage where appropriate' },
+      { id: 'lit_15d', title: 'Confirm no defenses are waived' },
+    ]
+  },
+  {
+    id: 'lit_16', title: 'Client review and authority', category: 'Insurance',
+    defaultDaysFromOpen: 18, critical: true,
+    subtasks: [
+      { id: 'lit_16a', title: 'Send draft answer to client if guidelines require review' },
+      { id: 'lit_16b', title: 'Identify filing deadline and explain any special defenses or motions' },
+      { id: 'lit_16c', title: 'Request authority to file if required' },
+    ]
+  },
+  {
+    id: 'lit_17', title: 'File answer or responsive motion', category: 'Pleadings',
+    defaultDaysFromOpen: 25, critical: true,
+    subtasks: [
+      { id: 'lit_17a', title: 'Finalize pleading' },
+      { id: 'lit_17b', title: 'File through e-filing system' },
+      { id: 'lit_17c', title: 'Serve all counsel' },
+      { id: 'lit_17d', title: 'Save filed copy and service confirmation' },
+      { id: 'lit_17e', title: 'Update deadline chart' },
+    ]
+  },
+  {
+    id: 'lit_18', title: 'Report filing to client', category: 'Insurance',
+    defaultDaysFromOpen: 26, critical: true,
+    subtasks: [
+      { id: 'lit_18a', title: 'Send filed answer to client' },
+      { id: 'lit_18b', title: 'Confirm discovery timeline' },
+      { id: 'lit_18c', title: 'Request any remaining materials' },
+    ]
+  },
 
-  { id: 'prelit_55', title: 'Prepare EUO master outline', category: 'EUO', defaultDaysFromOpen: 25, critical: true },
-  { id: 'prelit_56', title: 'Draft EUO rules and preliminary admonitions', category: 'EUO', defaultDaysFromOpen: 25, critical: false },
-  { id: 'prelit_57', title: 'Draft EUO identity and background questions', category: 'EUO', defaultDaysFromOpen: 25, critical: false },
-  { id: 'prelit_58', title: 'Draft EUO policy and application questions', category: 'EUO', defaultDaysFromOpen: 26, critical: false },
-  { id: 'prelit_59', title: 'Draft EUO claim reporting questions', category: 'EUO', defaultDaysFromOpen: 26, critical: false },
-  { id: 'prelit_60', title: 'Draft EUO timeline of loss questions', category: 'EUO', defaultDaysFromOpen: 27, critical: true },
-  { id: 'prelit_61', title: 'Draft EUO ownership and possession questions', category: 'EUO', defaultDaysFromOpen: 27, critical: false },
-  { id: 'prelit_62', title: 'Draft EUO use and residency questions', category: 'EUO', defaultDaysFromOpen: 27, critical: false },
-  { id: 'prelit_63', title: 'Draft EUO damages and injuries questions', category: 'EUO', defaultDaysFromOpen: 28, critical: false },
-  { id: 'prelit_64', title: 'Draft EUO document production questions', category: 'EUO', defaultDaysFromOpen: 28, critical: false },
-  { id: 'prelit_65', title: 'Draft EUO prior claims and losses questions', category: 'EUO', defaultDaysFromOpen: 29, critical: false },
-  { id: 'prelit_66', title: 'Draft EUO inconsistency questions', category: 'EUO', defaultDaysFromOpen: 29, critical: true },
-  { id: 'prelit_67', title: 'Draft EUO missing documents, cooperation, and closing questions', category: 'EUO', defaultDaysFromOpen: 30, critical: false },
+  // ── E. EARLY INVESTIGATION ─────────────────────────────────────────────────
+  {
+    id: 'lit_19', title: 'Obtain public records', category: 'Investigation',
+    defaultDaysFromOpen: 14, critical: false,
+    subtasks: [
+      { id: 'lit_19a', title: 'Request: police report, accident/incident report, 911 records, bodycam/dashcam, citations/dispositions, CAD reports' },
+      { id: 'lit_19b', title: 'Request as applicable: business license records, property records, Secretary of State records, court records, criminal records, prior lawsuits, bankruptcy filings, probate records, traffic signal/timing records, weather records, roadway/design/maintenance records' },
+    ]
+  },
+  {
+    id: 'lit_20', title: 'Investigate parties', category: 'Investigation',
+    defaultDaysFromOpen: 21, critical: false,
+    subtasks: [
+      { id: 'lit_20a', title: 'Plaintiff: prior lawsuits, criminal history if relevant, bankruptcy, social media, employment, business ownership, property records, prior claims/injuries, public posts about incident' },
+      { id: 'lit_20b', title: 'Defendant/insured: prior incidents, employment status, licensure, training records, internal documents, vehicle ownership/maintenance, company policies, related claims' },
+    ]
+  },
+  {
+    id: 'lit_21', title: 'Identify non-parties', category: 'Investigation',
+    defaultDaysFromOpen: 21, critical: true,
+    subtasks: [
+      { id: 'lit_21a', title: 'Create list: medical providers, employers, prior employers, pharmacies, health insurers, auto insurers, disability insurers, Medicare/Medicaid, workers\' comp carriers, prior treating physicians' },
+      { id: 'lit_21b', title: 'Add to list: witnesses, repair facilities, tow yards, law enforcement agencies, government agencies, property owners, surveillance sources, expert candidates' },
+    ]
+  },
 
-  { id: 'prelit_68', title: 'Prepare EUO exhibits', category: 'EUO', defaultDaysFromOpen: 30, critical: true },
-  { id: 'prelit_69', title: 'Gather policy, application, declarations, claim notes, letters, recorded statement transcript, police or fire report, photos, estimates, receipts, medical records, prior claim records, title, registration, repair records, texts, emails, social media, timeline chart, document request, and prior inconsistent statements', category: 'EUO', defaultDaysFromOpen: 30, critical: false },
-  { id: 'prelit_70', title: 'Prepare EUO binder', category: 'EUO', defaultDaysFromOpen: 31, critical: true },
-  { id: 'prelit_71', title: 'Include notice, policy excerpts, claim chronology, issue list, question outline, exhibits, document deficiency chart, key inconsistencies, and closing checklist in EUO binder', category: 'EUO', defaultDaysFromOpen: 31, critical: false },
-  { id: 'prelit_72', title: 'Confirm EUO appearance', category: 'EUO', defaultDaysFromOpen: 32, critical: true },
-  { id: 'prelit_73', title: 'Confirm examinee or counsel, court reporter, interpreter, client attendance, location or remote link, available exhibits, and documents received before EUO', category: 'EUO', defaultDaysFromOpen: 32, critical: true },
-  { id: 'prelit_74', title: 'Handle EUO non-appearance if needed', category: 'EUO', defaultDaysFromOpen: 35, critical: true },
-  { id: 'prelit_75', title: 'Go on record if appropriate, mark notice as exhibit, confirm no appearance, confirm waiting period, obtain non-appearance transcript or certificate, notify client, send follow-up letter, and decide whether to reschedule, issue final opportunity, or recommend coverage action', category: 'EUO', defaultDaysFromOpen: 35, critical: true },
+  // ── F. INITIAL CLIENT REPORT / LITIGATION PLAN ────────────────────────────
+  {
+    id: 'lit_22', title: 'Prepare initial report to client', category: 'Insurance',
+    defaultDaysFromOpen: 30, critical: true,
+    subtasks: [
+      { id: 'lit_22a', title: 'Include: summary of allegations, procedural posture, service and deadline status' },
+      { id: 'lit_22b', title: 'Include: initial liability assessment, initial damages assessment, coverage observations if appropriate' },
+      { id: 'lit_22c', title: 'Include: known strengths, known weaknesses, missing information, immediate discovery plan, recommended budget, recommended reserves if requested, recommended next steps' },
+    ]
+  },
+  {
+    id: 'lit_23', title: 'Create litigation plan', category: 'Admin',
+    defaultDaysFromOpen: 30, critical: true,
+    subtasks: [
+      { id: 'lit_23a', title: 'Break into phases: pleadings, written discovery, records collection, depositions, expert review, dispositive motions, mediation/settlement, pretrial' },
+    ]
+  },
 
-  { id: 'prelit_76', title: 'Open EUO record', category: 'EUO', defaultDaysFromOpen: 35, critical: true },
-  { id: 'prelit_77', title: 'State appearances, identify claim and policy, confirm witness identity, administer oath, explain ground rules, confirm no impairment, and confirm witness understands obligation to tell truth', category: 'EUO', defaultDaysFromOpen: 35, critical: true },
-  { id: 'prelit_78', title: 'Conduct EUO examination', category: 'EUO', defaultDaysFromOpen: 35, critical: true },
-  { id: 'prelit_79', title: 'Follow outline, lock down timeline, clarify inconsistencies, confirm documents, ask foundational exhibit questions, avoid unnecessary argument, preserve clear record, ask short precise questions, and follow up on evasive answers', category: 'EUO', defaultDaysFromOpen: 35, critical: true },
-  { id: 'prelit_80', title: 'Address document deficiencies on EUO record', category: 'EUO', defaultDaysFromOpen: 35, critical: true },
-  { id: 'prelit_81', title: 'Identify requested documents, ask whether they exist, whether they were searched for, why not produced, when they will be produced, obtain commitment to supplement, and calendar deadline', category: 'EUO', defaultDaysFromOpen: 35, critical: false },
-  { id: 'prelit_82', title: 'Close EUO examination', category: 'EUO', defaultDaysFromOpen: 35, critical: true },
-  { id: 'prelit_83', title: 'Ask correction questions, supplementation questions, reserve right to continue EUO if documents remain outstanding, confirm transcript review process, and state agreed production deadlines on record', category: 'EUO', defaultDaysFromOpen: 35, critical: false },
+  // ── G. WRITTEN DISCOVERY TO PLAINTIFF ─────────────────────────────────────
+  {
+    id: 'lit_24', title: 'Draft written discovery to plaintiff', category: 'Discovery',
+    defaultDaysFromOpen: 35, critical: false,
+    subtasks: [
+      { id: 'lit_24a', title: 'Draft interrogatories' },
+      { id: 'lit_24b', title: 'Draft requests for production' },
+      { id: 'lit_24c', title: 'Draft requests for admission targeting: basic undisputed facts, authenticity of records, no evidence of certain claims, prior conditions, treatment gaps, lack of wage loss support, lack of punitive/intentional conduct, receipt of policy limits if applicable, foundation for summary judgment' },
+    ]
+  },
+  {
+    id: 'lit_25', title: 'Serve written discovery to plaintiff', category: 'Discovery',
+    defaultDaysFromOpen: 40, critical: true,
+    subtasks: [
+      { id: 'lit_25a', title: 'Serve all written discovery' },
+      { id: 'lit_25b', title: 'Calendar plaintiff\'s response deadline' },
+      { id: 'lit_25c', title: 'Calendar deficiency review date' },
+      { id: 'lit_25d', title: 'Save served copies' },
+    ]
+  },
 
-  { id: 'prelit_84', title: 'Order and review EUO transcript', category: 'EUO', defaultDaysFromOpen: 42, critical: true },
-  { id: 'prelit_85', title: 'Request transcript, save transcript, review for admissions, inconsistencies, missing information, and follow-up investigation', category: 'EUO', defaultDaysFromOpen: 42, critical: true },
-  { id: 'prelit_86', title: 'Calendar EUO errata deadline if applicable', category: 'Deadline', defaultDaysFromOpen: 42, critical: true },
-  { id: 'prelit_87', title: 'Prepare EUO summary', category: 'EUO', defaultDaysFromOpen: 45, critical: true },
-  { id: 'prelit_88', title: 'Summarize EUO date, location, participants, documents produced, documents missing, key testimony, key admissions, key inconsistencies, credibility concerns, coverage issues, and follow-up needed', category: 'EUO', defaultDaysFromOpen: 45, critical: true },
-  { id: 'prelit_89', title: 'Follow up on EUO document production', category: 'Investigation', defaultDaysFromOpen: 45, critical: true },
-  { id: 'prelit_90', title: 'Send letter confirming outstanding documents, provide deadline, identify consequence of non-compliance, calendar follow-up, and report non-compliance to client', category: 'Investigation', defaultDaysFromOpen: 45, critical: true },
-  { id: 'prelit_91', title: 'Continue investigation if needed', category: 'Investigation', defaultDaysFromOpen: 50, critical: false },
-  { id: 'prelit_92', title: 'Evaluate additional EUO, EUO of another witness, public records request, medical records, pharmacy records, financial records, employment records, vehicle or property records, expert review, SIU referral, or recorded witness statements', category: 'Investigation', defaultDaysFromOpen: 50, critical: false },
+  // ── H. RESPONDING TO PLAINTIFF'S DISCOVERY ────────────────────────────────
+  {
+    id: 'lit_26', title: 'Review plaintiff\'s discovery requests', category: 'Discovery',
+    defaultDaysFromOpen: 35, critical: true,
+    subtasks: [
+      { id: 'lit_26a', title: 'Identify response deadline and calendar internal draft deadline' },
+      { id: 'lit_26b', title: 'Identify objections, documents needed from client/insured, sensitive or privileged materials, and overbroad or improper requests' },
+    ]
+  },
+  {
+    id: 'lit_27', title: 'Collect responsive information', category: 'Discovery',
+    defaultDaysFromOpen: 45, critical: true,
+    subtasks: [
+      { id: 'lit_27a', title: 'Send discovery questionnaire to insured/client and request documents' },
+      { id: 'lit_27b', title: 'Follow up for missing materials' },
+      { id: 'lit_27c', title: 'Review claim file for responsive non-privileged materials' },
+      { id: 'lit_27d', title: 'Identify privileged materials and prepare privilege log if needed' },
+    ]
+  },
+  {
+    id: 'lit_28', title: 'Draft and finalize defendant discovery responses', category: 'Discovery',
+    defaultDaysFromOpen: 55, critical: true,
+    subtasks: [
+      { id: 'lit_28a', title: 'Answer interrogatories, draft objections, produce responsive documents, and withhold privileged/protected materials' },
+      { id: 'lit_28b', title: 'Identify supplementation obligations and prepare verification if required' },
+      { id: 'lit_28c', title: 'Send to client/insured for verification and obtain signed verification' },
+      { id: 'lit_28d', title: 'Serve responses and save service email/certificate' },
+      { id: 'lit_28e', title: 'Calendar supplementation deadlines' },
+    ]
+  },
+  {
+    id: 'lit_29', title: 'Report discovery responses to client', category: 'Insurance',
+    defaultDaysFromOpen: 61, critical: false,
+    subtasks: [
+      { id: 'lit_29a', title: 'Confirm discovery responses served' },
+      { id: 'lit_29b', title: 'Identify any problematic requests, documents withheld, and next steps' },
+    ]
+  },
 
-  { id: 'prelit_93', title: 'Prepare post-EUO report to client', category: 'Insurance', defaultDaysFromOpen: 55, critical: true },
-  { id: 'prelit_94', title: 'Include assignment summary, materials reviewed, investigation completed, EUO testimony summary, document production status, key facts, key inconsistencies, coverage provisions, cooperation issues, fraud or misrepresentation issues, damages evaluation, additional investigation needed, and recommendation', category: 'Insurance', defaultDaysFromOpen: 55, critical: true },
-  { id: 'prelit_95', title: 'Prepare coverage or claim recommendation', category: 'Insurance', defaultDaysFromOpen: 56, critical: true },
-  { id: 'prelit_96', title: 'Evaluate whether to continue investigation, request additional documents, conduct second EUO, take EUO of additional person, pay claim, partially pay claim, deny claim, issue ROR, issue non-waiver agreement, refer to SIU, seek declaratory judgment, prepare for litigation, or recommend settlement', category: 'Insurance', defaultDaysFromOpen: 56, critical: true },
-  { id: 'prelit_97', title: 'Draft denial or coverage-position support if requested', category: 'Insurance', defaultDaysFromOpen: 60, critical: true },
-  { id: 'prelit_98', title: 'Identify policy provisions, facts supporting position, documents and testimony supporting position, known counterarguments, whether letter should come from carrier or counsel, and state-specific claim handling requirements', category: 'Insurance', defaultDaysFromOpen: 60, critical: true },
-  { id: 'prelit_99', title: 'Prepare litigation-readiness memo if suit is likely', category: 'Insurance', defaultDaysFromOpen: 60, critical: false },
-  { id: 'prelit_100', title: 'Identify likely claims, plaintiff arguments, defense themes, preserved documents, witnesses, needed discovery, early dispositive issues, venue or jurisdiction issues, and recommended litigation plan', category: 'Insurance', defaultDaysFromOpen: 60, critical: false },
+  // ── I. PLAINTIFF'S DISCOVERY RESPONSES / DEFICIENCY PROCESS ───────────────
+  {
+    id: 'lit_30', title: 'Review plaintiff\'s discovery responses', category: 'Discovery',
+    defaultDaysFromOpen: 75, critical: true,
+    subtasks: [
+      { id: 'lit_30a', title: 'Compare responses to allegations; identify admissions, evasive answers, missing documents, and objection-only responses' },
+      { id: 'lit_30b', title: 'Identify new providers, employers, witnesses, prior claims, or injuries' },
+      { id: 'lit_30c', title: 'Update chronology and damages summary' },
+    ]
+  },
+  {
+    id: 'lit_31', title: 'Create deficiency chart', category: 'Discovery',
+    defaultDaysFromOpen: 80, critical: false,
+    subtasks: [
+      { id: 'lit_31a', title: 'For each deficient response chart: request number, plaintiff\'s response, problem with response, requested supplement, strategic importance, and deadline for follow-up' },
+    ]
+  },
+  {
+    id: 'lit_32', title: 'Send deficiency letter', category: 'Discovery',
+    defaultDaysFromOpen: 85, critical: true,
+    subtasks: [
+      { id: 'lit_32a', title: 'Be specific; request supplementation by a date certain' },
+      { id: 'lit_32b', title: 'Identify key missing records and preserve right to move to compel' },
+      { id: 'lit_32c', title: 'Keep tone professional but clear' },
+    ]
+  },
+  {
+    id: 'lit_33', title: 'Follow up on discovery deficiencies', category: 'Discovery',
+    defaultDaysFromOpen: 100, critical: false,
+    subtasks: [
+      { id: 'lit_33a', title: 'Calendar response deadline' },
+      { id: 'lit_33b', title: 'If no adequate response, confer with opposing counsel' },
+      { id: 'lit_33c', title: 'Decide whether to move to compel; report issue to client if motion practice is likely' },
+    ]
+  },
+  {
+    id: 'lit_34', title: 'File motion to compel, if needed', category: 'Motions',
+    defaultDaysFromOpen: 115, critical: true,
+    subtasks: [
+      { id: 'lit_34a', title: 'Attach discovery, deficient responses, and good-faith correspondence' },
+      { id: 'lit_34b', title: 'Explain prejudice and request fees/sanctions where appropriate' },
+      { id: 'lit_34c', title: 'Calendar hearing if needed' },
+    ]
+  },
 
-  { id: 'prelit_101', title: 'Close pre-litigation assignment if resolved', category: 'Admin', defaultDaysFromOpen: 65, critical: false },
-  { id: 'prelit_102', title: 'Confirm client final decision, save final report, save transcript and exhibits, confirm no outstanding deadlines, and close task list', category: 'Admin', defaultDaysFromOpen: 65, critical: false },
-  { id: 'prelit_103', title: 'Transition to litigation if suit is filed', category: 'Admin', defaultDaysFromOpen: 65, critical: true },
-  { id: 'prelit_104', title: 'Convert investigation file into litigation file, save EUO transcript as key exhibit, save document production chart, save coverage analysis separately if privileged or sensitive, prepare initial litigation cheat sheet, calendar answer deadline, and begin civil defense case task list', category: 'Admin', defaultDaysFromOpen: 65, critical: true },
+  // ── J. NON-PARTY RECORDS COLLECTION ───────────────────────────────────────
+  {
+    id: 'lit_35', title: 'Build non-party subpoena list', category: 'Medical',
+    defaultDaysFromOpen: 50, critical: true,
+    subtasks: [
+      { id: 'lit_35a', title: 'Identify: medical providers, imaging centers, pharmacies, prior doctors, employers, health insurers, auto insurers, prior claim carriers, workers\' comp carriers, Medicare/Medicaid' },
+      { id: 'lit_35b', title: 'Identify: schools, law enforcement, EMS/fire, repair facilities, cell phone providers, government agencies, surveillance/video custodians' },
+    ]
+  },
+  {
+    id: 'lit_36', title: 'Prepare authorizations if needed', category: 'Medical',
+    defaultDaysFromOpen: 55, critical: false,
+    subtasks: [
+      { id: 'lit_36a', title: 'Request HIPAA, employment, tax, pharmacy, and insurance authorizations' },
+      { id: 'lit_36b', title: 'Track whether plaintiff refuses or limits authorizations' },
+    ]
+  },
+  {
+    id: 'lit_37', title: 'Serve notices and subpoenas', category: 'Medical',
+    defaultDaysFromOpen: 65, critical: true,
+    subtasks: [
+      { id: 'lit_37a', title: 'Serve notice to parties and wait required objection period if applicable' },
+      { id: 'lit_37b', title: 'Serve subpoena, track service date, and calendar production deadline' },
+    ]
+  },
+  {
+    id: 'lit_38', title: 'Follow up on records', category: 'Medical',
+    defaultDaysFromOpen: 85, critical: false,
+    subtasks: [
+      { id: 'lit_38a', title: 'Contact custodian if no response; obtain invoices and arrange payment if approved' },
+      { id: 'lit_38b', title: 'Track outstanding requests; follow up every 1-2 weeks; reissue subpoena if defective' },
+    ]
+  },
+  {
+    id: 'lit_39', title: 'Review incoming records', category: 'Medical',
+    defaultDaysFromOpen: 95, critical: true,
+    subtasks: [
+      { id: 'lit_39a', title: 'Save records by provider/date; OCR if needed; create record index' },
+      { id: 'lit_39b', title: 'Identify: prior similar complaints, degenerative findings, treatment gaps, inconsistent histories, alternative causes, medication history, prior/subsequent accidents, work restrictions, disability claims, causation opinions, billing irregularities' },
+      { id: 'lit_39c', title: 'Update medical chronology' },
+    ]
+  },
+  {
+    id: 'lit_40', title: 'Report important records to client', category: 'Insurance',
+    defaultDaysFromOpen: 115, critical: false,
+    subtasks: [
+      { id: 'lit_40a', title: 'Send material records summary and identify impact on liability/damages' },
+      { id: 'lit_40b', title: 'Recommend follow-up discovery and expert review if appropriate' },
+    ]
+  },
+
+  // ── K. MEDICAL / DAMAGES ANALYSIS ─────────────────────────────────────────
+  {
+    id: 'lit_41', title: 'Create treatment chronology', category: 'Medical',
+    defaultDaysFromOpen: 120, critical: true,
+    subtasks: [
+      { id: 'lit_41a', title: 'For each provider chart: date of service, provider, complaint, history given, diagnosis, treatment, imaging, objective findings, subjective complaints, work restrictions, causation statements, billing amount, notes/defense issues' },
+    ]
+  },
+  {
+    id: 'lit_42', title: 'Create pre-existing condition chart', category: 'Medical',
+    defaultDaysFromOpen: 125, critical: true,
+    subtasks: [
+      { id: 'lit_42a', title: 'Chart: prior injuries, body parts, imaging, surgeries, medications, pain complaints, disability claims, similar symptoms, treating providers, and treatment gaps' },
+    ]
+  },
+  {
+    id: 'lit_43', title: 'Create post-incident causation chart', category: 'Medical',
+    defaultDaysFromOpen: 130, critical: true,
+    subtasks: [
+      { id: 'lit_43a', title: 'Chart: first complaint, delay in treatment, mechanism of injury, objective findings, degenerative findings, alternative causes, inconsistent histories, treatment escalation, gaps in care, subsequent injuries, provider causation opinions, and weaknesses in causation opinions' },
+    ]
+  },
+  {
+    id: 'lit_44', title: 'Analyze claimed specials', category: 'Damages',
+    defaultDaysFromOpen: 135, critical: true,
+    subtasks: [
+      { id: 'lit_44a', title: 'Analyze: total medical bills, paid amounts, write-offs, liens, health insurance payments, medical funding, treatment reasonableness, necessity, and relatedness' },
+      { id: 'lit_44b', title: 'Analyze: future care, lost wages, loss of earning capacity, and out-of-pocket expenses' },
+    ]
+  },
+
+  // ── L. DEPOSITIONS ─────────────────────────────────────────────────────────
+  {
+    id: 'lit_45', title: 'Determine deposition plan', category: 'Discovery',
+    defaultDaysFromOpen: 90, critical: true,
+    subtasks: [
+      { id: 'lit_45a', title: 'Prioritize: plaintiff, defendant/insured, eyewitnesses, treating doctors, corporate representatives, experts, investigating officer, EMS/fire, employer witnesses, family/friends for damages, records custodians if needed' },
+    ]
+  },
+  {
+    id: 'lit_46', title: 'Prepare for plaintiff deposition', category: 'Discovery',
+    defaultDaysFromOpen: 120, critical: true,
+    subtasks: [
+      { id: 'lit_46a', title: 'Review: pleadings, discovery responses, medical records, prior claims/lawsuits, social media, employment records, and incident evidence' },
+      { id: 'lit_46b', title: 'Prepare exhibit list' },
+      { id: 'lit_46c', title: 'Prepare deposition outline covering: background, education/employment, prior medical history, prior accidents/injuries, incident facts, liability version, witnesses, statements, symptoms, first treatment, treatment course, gaps, prior similar complaints, subsequent injuries, activities, work limitations, daily activities, claimed damages, bills, medications, surgeries, future treatment, social media, discovery responses, demand allegations, punitive/fees basis if asserted' },
+    ]
+  },
+  {
+    id: 'lit_47', title: 'Schedule deposition', category: 'Discovery',
+    defaultDaysFromOpen: 100, critical: true,
+    subtasks: [
+      { id: 'lit_47a', title: 'Coordinate dates and notice deposition' },
+      { id: 'lit_47b', title: 'Reserve court reporter, videographer if needed, interpreter if needed, and confirm location/remote link' },
+      { id: 'lit_47c', title: 'Serve subpoena if non-party; calendar prep deadline' },
+    ]
+  },
+  {
+    id: 'lit_48', title: 'Prepare insured/defendant for deposition', category: 'Discovery',
+    defaultDaysFromOpen: 130, critical: true,
+    subtasks: [
+      { id: 'lit_48a', title: 'Explain process; review facts, pleadings, prior statements, discovery responses, and exhibits' },
+      { id: 'lit_48b', title: 'Discuss likely plaintiff themes; practice clear, truthful answers; warn against guessing' },
+      { id: 'lit_48c', title: 'Discuss demeanor and confirm logistics' },
+    ]
+  },
+  {
+    id: 'lit_49', title: 'Take deposition', category: 'Discovery',
+    defaultDaysFromOpen: 140, critical: true,
+    subtasks: [
+      { id: 'lit_49a', title: 'Confirm appearances and mark exhibits' },
+      { id: 'lit_49b', title: 'Lock down plaintiff\'s version; obtain admissions; explore inconsistencies; preserve summary judgment points and impeachment' },
+      { id: 'lit_49c', title: 'Explore damages, causation, alternative causes, and lack of evidence; ask follow-up questions based on answers' },
+    ]
+  },
+  {
+    id: 'lit_50', title: 'Post-deposition tasks', category: 'Discovery',
+    defaultDaysFromOpen: 145, critical: true,
+    subtasks: [
+      { id: 'lit_50a', title: 'Save transcript; summarize key testimony; identify errata deadline; calendar transcript review' },
+      { id: 'lit_50b', title: 'Pull impeachment excerpts; update liability and damages assessment' },
+      { id: 'lit_50c', title: 'Send deposition report to client; identify follow-up discovery; identify dispositive motion potential' },
+    ]
+  },
+
+  // ── M. EXPERT REVIEW / CONSULTING ─────────────────────────────────────────
+  {
+    id: 'lit_51', title: 'Determine whether expert is needed', category: 'Experts',
+    defaultDaysFromOpen: 120, critical: true,
+    subtasks: [
+      { id: 'lit_51a', title: 'Consider: medical causation, biomechanics, accident reconstruction, human factors, premises safety, engineering, standard of care, billing reasonableness, life care planning, vocational/economic damages, fire/theft/fraud, product defect, weather/roadway, toxicology' },
+    ]
+  },
+  {
+    id: 'lit_52', title: 'Obtain client authority for expert', category: 'Experts',
+    defaultDaysFromOpen: 125, critical: true,
+    subtasks: [
+      { id: 'lit_52a', title: 'Explain why expert is needed, identify proposed expert, estimate cost, and define scope' },
+      { id: 'lit_52b', title: 'Request authority' },
+    ]
+  },
+  {
+    id: 'lit_53', title: 'Retain consulting expert', category: 'Experts',
+    defaultDaysFromOpen: 140, critical: true,
+    subtasks: [
+      { id: 'lit_53a', title: 'Send engagement letter; confirm hourly rates and conflict check' },
+      { id: 'lit_53b', title: 'Send materials: pleadings, discovery responses, medical chronology, key records, imaging, photos/videos, deposition transcripts, incident reports, relevant documents' },
+      { id: 'lit_53c', title: 'Identify specific questions for expert' },
+    ]
+  },
+  {
+    id: 'lit_54', title: 'Expert consult', category: 'Experts',
+    defaultDaysFromOpen: 155, critical: false,
+    subtasks: [
+      { id: 'lit_54a', title: 'Discuss strengths/weaknesses and whether opinions support defense themes' },
+      { id: 'lit_54b', title: 'Identify additional materials needed; determine consulting vs. testifying role' },
+      { id: 'lit_54c', title: 'Document strategy without creating unnecessary discoverable materials' },
+    ]
+  },
+  {
+    id: 'lit_55', title: 'Expert report/disclosure', category: 'Experts',
+    defaultDaysFromOpen: 180, critical: true,
+    subtasks: [
+      { id: 'lit_55a', title: 'Calendar disclosure deadline' },
+      { id: 'lit_55b', title: 'Obtain final opinions; review report for factual accuracy and no unsupported statements' },
+      { id: 'lit_55c', title: 'Serve disclosure; prepare expert for deposition' },
+    ]
+  },
+  {
+    id: 'lit_56', title: 'Depose opposing expert', category: 'Experts',
+    defaultDaysFromOpen: 210, critical: false,
+    subtasks: [
+      { id: 'lit_56a', title: 'Obtain expert file; review report; research expert; review prior testimony' },
+      { id: 'lit_56b', title: 'Identify methodology issues, assumptions, and missing facts; prepare cross outline' },
+      { id: 'lit_56c', title: 'Take deposition; evaluate Daubert/motion to exclude' },
+    ]
+  },
+
+  // ── N. SETTLEMENT EVALUATION / MEDIATION ──────────────────────────────────
+  {
+    id: 'lit_57', title: 'Evaluate settlement posture', category: 'Negotiation',
+    defaultDaysFromOpen: 150, critical: true,
+    subtasks: [
+      { id: 'lit_57a', title: 'Review: liability, damages, venue, plaintiff credibility, medical causation, specials, verdict risk, defense costs, policy limits, liens, prior negotiations' },
+    ]
+  },
+  {
+    id: 'lit_58', title: 'Prepare settlement report', category: 'Negotiation',
+    defaultDaysFromOpen: 165, critical: true,
+    subtasks: [
+      { id: 'lit_58a', title: 'Include: current procedural posture, liability analysis, damages analysis, medical summary, defense strengths, defense weaknesses, jury risk, estimated verdict range, settlement value, recommended authority, mediation recommendation' },
+    ]
+  },
+  {
+    id: 'lit_59', title: 'Prepare for mediation', category: 'Negotiation',
+    defaultDaysFromOpen: 180, critical: true,
+    subtasks: [
+      { id: 'lit_59a', title: 'Obtain authority; select mediator; schedule mediation' },
+      { id: 'lit_59b', title: 'Prepare: mediation statement, exhibits, damages chart, chronology, confidential statement if helpful' },
+      { id: 'lit_59c', title: 'Prepare client/insured; confirm attendance requirements' },
+    ]
+  },
+  {
+    id: 'lit_60', title: 'Conduct mediation', category: 'Negotiation',
+    defaultDaysFromOpen: 210, critical: true,
+    subtasks: [
+      { id: 'lit_60a', title: 'Present defense themes; use demonstratives/charts if helpful; identify causation and damages weaknesses' },
+      { id: 'lit_60b', title: 'Track offers/demands; communicate with client throughout; confirm authority before offers; document final numbers' },
+    ]
+  },
+  {
+    id: 'lit_61', title: 'Post-mediation report', category: 'Negotiation',
+    defaultDaysFromOpen: 211, critical: true,
+    subtasks: [
+      { id: 'lit_61a', title: 'Report outcome; identify last demand/offer; summarize mediator feedback; recommend next move' },
+      { id: 'lit_61b', title: 'Calendar any settlement deadlines' },
+      { id: 'lit_61c', title: 'If settled: begin release/dismissal process. If not settled: update litigation plan' },
+    ]
+  },
+
+  // ── O. DISPOSITIVE MOTIONS / PRETRIAL MOTIONS ──────────────────────────────
+  {
+    id: 'lit_62', title: 'Identify motion opportunities', category: 'Motions',
+    defaultDaysFromOpen: 170, critical: true,
+    subtasks: [
+      { id: 'lit_62a', title: 'Consider: motion for summary judgment, partial summary judgment, punitive damages, attorney\'s fees, negligent entrustment/hiring/training, causation, damages, expert exclusion' },
+      { id: 'lit_62b', title: 'Consider: motion in limine, motion to compel IME, motion to enforce discovery order, motion for sanctions' },
+    ]
+  },
+  {
+    id: 'lit_63', title: 'Build summary judgment record', category: 'Motions',
+    defaultDaysFromOpen: 190, critical: true,
+    subtasks: [
+      { id: 'lit_63a', title: 'Identify required elements, plaintiff\'s evidence, and missing evidence' },
+      { id: 'lit_63b', title: 'Pull: deposition excerpts, discovery admissions, medical record excerpts, expert opinions, affidavits' },
+      { id: 'lit_63c', title: 'Confirm admissibility; prepare statement of material facts if required; confirm exhibit numbering' },
+    ]
+  },
+  {
+    id: 'lit_64', title: 'Draft motion', category: 'Motions',
+    defaultDaysFromOpen: 215, critical: true,
+    subtasks: [
+      { id: 'lit_64a', title: 'Draft issue statement, fact section, and legal standard' },
+      { id: 'lit_64b', title: 'Draft argument by element with precise record citations' },
+      { id: 'lit_64c', title: 'Address expected plaintiff arguments; draft proposed order if needed; review for evidentiary support' },
+    ]
+  },
+  {
+    id: 'lit_65', title: 'File motion', category: 'Motions',
+    defaultDaysFromOpen: 240, critical: true,
+    subtasks: [
+      { id: 'lit_65a', title: 'Confirm deadline; file motion and exhibits; serve all counsel' },
+      { id: 'lit_65b', title: 'Calendar response/reply deadlines; report to client' },
+    ]
+  },
+  {
+    id: 'lit_66', title: 'Reply and hearing preparation', category: 'Motions',
+    defaultDaysFromOpen: 260, critical: true,
+    subtasks: [
+      { id: 'lit_66a', title: 'Review response; identify misstatements and unsupported factual assertions; draft reply' },
+      { id: 'lit_66b', title: 'Prepare: hearing outline, key case law sheet, record citation sheet, proposed order' },
+    ]
+  },
+
 ];
 
 export const TASK_CATEGORIES = {
@@ -303,6 +649,5 @@ export const TASK_CATEGORIES = {
   'Experts': '#84cc16',
   'Motions': '#a78bfa',
   'Trial': '#dc2626',
-  'EUO': '#14b8a6',
   'Other': '#6b7280',
 };
