@@ -14,17 +14,13 @@ function UrgencyBadge({ dueDate }) {
   const emoji = getUrgencyEmoji(level);
   const label = formatRelativeTime(dueDate);
   const styles = {
-    overdue: { background: 'var(--overdue-bg)', color: 'var(--overdue)', border: '1px solid #fca5a5' },
-    today:   { background: 'var(--today-bg)',   color: 'var(--today)',   border: '1px solid #fed7aa' },
-    critical:{ background: 'var(--today-bg)',   color: 'var(--today)',   border: '1px solid #fed7aa' },
-    urgent:  { background: 'var(--urgent-bg)',  color: 'var(--urgent)',  border: '1px solid #fde68a' },
-    soon:    { background: 'var(--soon-bg)',     color: 'var(--soon)',    border: '1px solid #bae6fd' },
+    overdue:  { background: 'var(--overdue-bg)',  color: 'var(--overdue)',  border: '1px solid #fca5a5' },
+    today:    { background: 'var(--today-bg)',    color: 'var(--today)',    border: '1px solid #fed7aa' },
+    critical: { background: 'var(--today-bg)',    color: 'var(--today)',    border: '1px solid #fed7aa' },
+    urgent:   { background: 'var(--urgent-bg)',   color: 'var(--urgent)',   border: '1px solid #fde68a' },
+    soon:     { background: 'var(--soon-bg)',     color: 'var(--soon)',     border: '1px solid #bae6fd' },
   };
-  return (
-    <span className="urgency-badge" style={styles[level] || {}}>
-      {emoji} {label}
-    </span>
-  );
+  return <span className="urgency-badge" style={styles[level] || {}}>{emoji} {label}</span>;
 }
 
 // ─── Task row ─────────────────────────────────────────────────────────────────
@@ -46,9 +42,8 @@ function TaskRow({ task, onToggle, onDelete, onUpdate }) {
     onUpdate(task.id, { title: editTitle, dueDate: editDue || null, note: editNote });
     setEditing(false);
   }
-  function toggleSubtask(subtaskId) {
-    const updated = subtasks.map(s => s.id === subtaskId ? { ...s, completed: !s.completed } : s);
-    onUpdate(task.id, { subtasks: updated });
+  function toggleSubtask(id) {
+    onUpdate(task.id, { subtasks: subtasks.map(s => s.id === id ? { ...s, completed: !s.completed } : s) });
   }
 
   if (editing) {
@@ -82,8 +77,10 @@ function TaskRow({ task, onToggle, onDelete, onUpdate }) {
 
   return (
     <div className="task-row-wrapper">
-      <div className={`task-row ${task.completed ? 'completed' : ''} ${level !== 'none' && level !== 'normal' && !task.completed ? `urgency-${level}` : ''}`}
-        style={urgencyColor && !task.completed ? { borderLeft: `3px solid ${urgencyColor}` } : {}}>
+      <div
+        className={`task-row ${task.completed ? 'completed' : ''} ${level !== 'none' && level !== 'normal' && !task.completed ? `urgency-${level}` : ''}`}
+        style={urgencyColor && !task.completed ? { borderLeft: `3px solid ${urgencyColor}` } : {}}
+      >
         <button className={`task-checkbox ${task.completed ? 'checked' : ''}`} onClick={() => onToggle(task.id)}>
           {task.completed ? '✓' : ''}
         </button>
@@ -172,7 +169,7 @@ function QuickAddTask({ onAdd }) {
   );
 }
 
-// ─── Case Detail View ─────────────────────────────────────────────────────────
+// ─── Case Detail ──────────────────────────────────────────────────────────────
 function CaseDetail({ caseData, onUpdate, onBack, onDelete }) {
   const [showCompleted, setShowCompleted] = useState(false);
   const pending = caseData.tasks.filter(t => !t.completed);
@@ -184,8 +181,8 @@ function CaseDetail({ caseData, onUpdate, onBack, onDelete }) {
     return da - db;
   });
   const focusNow = sortedPending.filter(t => {
-    const days = daysFromNow(t.dueDate);
-    return days !== null && (days <= 0 || (days <= 3 && t.critical));
+    const d = daysFromNow(t.dueDate);
+    return d !== null && (d <= 0 || (d <= 3 && t.critical));
   });
   const overdueCount = pending.filter(t => { const d = daysFromNow(t.dueDate); return d !== null && d < 0; }).length;
   const progress = caseData.tasks.length > 0 ? Math.round((completed.length / caseData.tasks.length) * 100) : 0;
@@ -195,11 +192,9 @@ function CaseDetail({ caseData, onUpdate, onBack, onDelete }) {
   }
   function deleteTask(id) { onUpdate({ tasks: caseData.tasks.filter(t => t.id !== id) }); }
   function updateTask(id, changes) { onUpdate({ tasks: caseData.tasks.map(t => t.id === id ? { ...t, ...changes } : t) }); }
-  function addTask(taskData) {
-    onUpdate({ tasks: [...caseData.tasks, { id: generateId(), ...taskData, completed: false, createdAt: todayISO() }] });
+  function addTask(data) {
+    onUpdate({ tasks: [...caseData.tasks, { id: generateId(), ...data, completed: false, createdAt: todayISO() }] });
   }
-
-  const typeLabel = caseData.type === 'prelitigation' ? 'Pre-Litigation' : 'Litigation';
 
   return (
     <div className="case-detail">
@@ -208,13 +203,17 @@ function CaseDetail({ caseData, onUpdate, onBack, onDelete }) {
         <div className="case-header-info">
           <div className="case-title-row">
             <h2 className="case-detail-title">{caseData.clientName}</h2>
-            <span className={`case-type-badge ${caseData.type === 'prelitigation' ? 'badge-prelit' : 'badge-lit'}`}>{typeLabel}</span>
+            <span className={`case-type-badge ${caseData.type === 'prelitigation' ? 'badge-prelit' : 'badge-lit'}`}>
+              {caseData.type === 'prelitigation' ? 'Pre-Litigation' : 'Litigation'}
+            </span>
           </div>
           {caseData.caseNumber && <div className="case-number">#{caseData.caseNumber}</div>}
           {caseData.description && <div className="case-description">{caseData.description}</div>}
           <div className="case-opened">Opened {formatDate(caseData.openedDate)}</div>
         </div>
-        <button className="btn-danger-sm" onClick={() => { if (window.confirm(`Delete case for ${caseData.clientName}?`)) onDelete(); }}>Delete Case</button>
+        <button className="btn-danger-sm" onClick={() => { if (window.confirm(`Delete case for ${caseData.clientName}?`)) onDelete(); }}>
+          Delete Case
+        </button>
       </div>
 
       <div className="progress-section">
@@ -300,14 +299,12 @@ function NewCaseModal({ onClose, onCreate }) {
           <div>
             <p className="modal-subtitle">What type of case is this?</p>
             <div className="case-type-choices">
-              <button className={`case-type-btn prelit ${caseType === 'prelitigation' ? 'selected' : ''}`}
-                onClick={() => { setCaseType('prelitigation'); setStep(2); }}>
+              <button className="case-type-btn prelit" onClick={() => { setCaseType('prelitigation'); setStep(2); }}>
                 <span className="case-type-icon">📋</span>
                 <span className="case-type-name">Pre-Litigation</span>
                 <span className="case-type-desc">{PRELITIGATION_TASKS.length} standard tasks auto-loaded</span>
               </button>
-              <button className={`case-type-btn lit ${caseType === 'litigation' ? 'selected' : ''}`}
-                onClick={() => { setCaseType('litigation'); setStep(2); }}>
+              <button className="case-type-btn lit" onClick={() => { setCaseType('litigation'); setStep(2); }}>
                 <span className="case-type-icon">⚖️</span>
                 <span className="case-type-name">Litigation</span>
                 <span className="case-type-desc">{LITIGATION_TASKS.length} tasks with subtasks auto-loaded</span>
@@ -335,7 +332,7 @@ function NewCaseModal({ onClose, onCreate }) {
             </div>
             <div className="modal-field">
               <label>Brief Description</label>
-              <input className="modal-input" placeholder="e.g. Slip and fall, grocery store" value={description} onChange={e => setDescription(e.target.value)} />
+              <input className="modal-input" placeholder="e.g. MVA, rear-end collision" value={description} onChange={e => setDescription(e.target.value)} />
             </div>
             <div className="modal-field">
               <label>Date Opened</label>
@@ -346,139 +343,6 @@ function NewCaseModal({ onClose, onCreate }) {
           </div>
         )}
       </div>
-    </div>
-  );
-}
-
-// ─── Alerts Panel ─────────────────────────────────────────────────────────────
-function AlertsPanel({ cases }) {
-  const urgent = [];
-  cases.forEach(c => {
-    c.tasks.filter(t => !t.completed).forEach(t => {
-      const days = daysFromNow(t.dueDate);
-      const level = getUrgencyLevel(days);
-      if (level !== 'none' && level !== 'normal' && level !== 'soon') {
-        urgent.push({ ...t, caseName: c.clientName, caseId: c.id, days });
-      }
-    });
-  });
-  urgent.sort((a, b) => (a.days ?? 999) - (b.days ?? 999));
-  if (urgent.length === 0) return null;
-  return (
-    <div className="alerts-panel">
-      <div className="alerts-header">
-        <span className="alerts-icon">🚨</span>
-        <span className="alerts-title">Needs Attention Now</span>
-        <span className="alerts-count">{urgent.length}</span>
-      </div>
-      <div className="alerts-list">
-        {urgent.map(t => (
-          <div key={t.id} className="alert-item">
-            <div className="alert-case-name">{t.caseName}</div>
-            <div className="alert-task-title">{t.title}</div>
-            <UrgencyBadge dueDate={t.dueDate} />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-// ─── Upcoming Deadlines ───────────────────────────────────────────────────────
-function UpcomingDeadlines({ cases, miscTasks, onSelectCase }) {
-  const all = [];
-  cases.forEach(c => {
-    c.tasks.filter(t => !t.completed && t.dueDate).forEach(t => {
-      all.push({ ...t, caseName: c.clientName, caseId: c.id, isMisc: false });
-    });
-  });
-  (miscTasks || []).filter(t => !t.completed && t.dueDate).forEach(t => {
-    all.push({ ...t, caseName: 'Misc', caseId: null, isMisc: true });
-  });
-  all.sort((a, b) => {
-    const da = daysFromNow(a.dueDate), db = daysFromNow(b.dueDate);
-    if (da === null && db === null) return 0;
-    if (da === null) return 1; if (db === null) return -1;
-    return da - db;
-  });
-  const top25 = all.slice(0, 25);
-  if (top25.length === 0) return null;
-  return (
-    <div className="deadlines-panel">
-      <div className="deadlines-header">
-        <span className="deadlines-icon">🗓</span>
-        <span className="deadlines-title">Upcoming Deadlines</span>
-        <span className="task-count-badge">{top25.length} of {all.length}</span>
-      </div>
-      <div className="deadlines-list">
-        {top25.map(t => {
-          const days = daysFromNow(t.dueDate);
-          const level = getUrgencyLevel(days);
-          const color = getUrgencyColor(level);
-          return (
-            <div key={t.id} className="deadline-item" style={color ? { borderLeftColor: color } : {}}
-              onClick={() => t.caseId && onSelectCase(t.caseId)}>
-              <div className="deadline-item-left">
-                <div className="deadline-task-title">{t.title}</div>
-                <div className="deadline-case-name">
-                  {t.isMisc ? <span>📋 Misc</span> : `⚖️ ${t.caseName}`}
-                  {t.critical && <span className="critical-tag" style={{ marginLeft: 6 }}>CRITICAL</span>}
-                </div>
-              </div>
-              <div className="deadline-badge-col">
-                <UrgencyBadge dueDate={t.dueDate} />
-                {(level === 'none' || level === 'normal') && (
-                  <span style={{ fontSize: 11, color: 'var(--text3)', fontFamily: 'var(--font-mono)' }}>{formatDate(t.dueDate)}</span>
-                )}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
-// ─── Misc Panel ───────────────────────────────────────────────────────────────
-function MiscPanel({ tasks, onUpdate }) {
-  const [showCompleted, setShowCompleted] = useState(false);
-  const pending = tasks.filter(t => !t.completed);
-  const completed = tasks.filter(t => t.completed);
-  const sorted = [...pending].sort((a, b) => {
-    const da = daysFromNow(a.dueDate), db = daysFromNow(b.dueDate);
-    if (da === null && db === null) return 0;
-    if (da === null) return 1; if (db === null) return -1;
-    return da - db;
-  });
-  function toggleTask(id) { onUpdate(tasks.map(t => t.id === id ? { ...t, completed: !t.completed } : t)); }
-  function deleteTask(id) { onUpdate(tasks.filter(t => t.id !== id)); }
-  function updateTask(id, changes) { onUpdate(tasks.map(t => t.id === id ? { ...t, ...changes } : t)); }
-  function addTask(data) { onUpdate([...tasks, { id: generateId(), ...data, completed: false, createdAt: todayISO() }]); }
-  if (tasks.length === 0) return null;
-  return (
-    <div className="misc-panel">
-      <div className="misc-panel-header">
-        <span className="misc-icon">📋</span>
-        <span className="misc-title">Misc / Firm Tasks</span>
-        <span className="task-count-badge">{pending.length} pending</span>
-      </div>
-      <div className="tasks-list">
-        {sorted.map(t => <TaskRow key={t.id} task={t} onToggle={toggleTask} onDelete={deleteTask} onUpdate={updateTask} />)}
-        {sorted.length === 0 && <div className="empty-tasks">🎉 All misc tasks done!</div>}
-      </div>
-      <QuickAddTask onAdd={addTask} />
-      {completed.length > 0 && (
-        <div style={{ marginTop: 8 }}>
-          <button className="toggle-completed" onClick={() => setShowCompleted(!showCompleted)}>
-            {showCompleted ? '▼' : '▶'} Completed ({completed.length})
-          </button>
-          {showCompleted && (
-            <div className="tasks-list completed-list" style={{ marginTop: 8 }}>
-              {completed.map(t => <TaskRow key={t.id} task={t} onToggle={toggleTask} onDelete={deleteTask} onUpdate={updateTask} />)}
-            </div>
-          )}
-        </div>
-      )}
     </div>
   );
 }
@@ -542,6 +406,213 @@ function FloatingCaptureButton({ onClick }) {
   );
 }
 
+// ─── Collect sorted tasks helper ──────────────────────────────────────────────
+function collectAllTasks(cases, miscTasks) {
+  const all = [];
+  cases.forEach(c => {
+    c.tasks.filter(t => !t.completed && t.dueDate).forEach(t => {
+      all.push({ ...t, caseName: c.clientName, caseId: c.id, isMisc: false });
+    });
+  });
+  (miscTasks || []).filter(t => !t.completed && t.dueDate).forEach(t => {
+    all.push({ ...t, caseName: 'Misc', caseId: null, isMisc: true });
+  });
+  return all.sort((a, b) => {
+    const da = daysFromNow(a.dueDate), db = daysFromNow(b.dueDate);
+    if (da === null && db === null) return 0;
+    if (da === null) return 1; if (db === null) return -1;
+    return da - db;
+  });
+}
+
+// ─── Overdue sidebar panel ────────────────────────────────────────────────────
+function OverdueSidebar({ cases, onSelectCase }) {
+  const [showAll, setShowAll] = useState(false);
+  const overdue = [];
+  cases.forEach(c => {
+    c.tasks.filter(t => !t.completed && t.dueDate).forEach(t => {
+      const days = daysFromNow(t.dueDate);
+      if (days !== null && days < 0) overdue.push({ ...t, caseName: c.clientName, caseId: c.id, days });
+    });
+  });
+  overdue.sort((a, b) => a.days - b.days);
+  const visible = showAll ? overdue : overdue.slice(0, 8);
+
+  if (overdue.length === 0) return (
+    <div className="sidebar-panel">
+      <div className="sidebar-panel-header">
+        <span className="sidebar-panel-title">Overdue Tasks</span>
+        <span className="sidebar-count sidebar-count-ok">✓ None</span>
+      </div>
+      <p className="sidebar-empty-msg">All caught up — nothing overdue!</p>
+    </div>
+  );
+
+  return (
+    <div className="sidebar-panel sidebar-panel-overdue">
+      <div className="sidebar-panel-header">
+        <span className="sidebar-panel-title">🚨 Overdue Tasks</span>
+        <span className="sidebar-count sidebar-count-red">{overdue.length}</span>
+      </div>
+      <div className="sidebar-items">
+        {visible.map(t => (
+          <div key={t.id} className="sidebar-item sidebar-item-overdue" onClick={() => t.caseId && onSelectCase(t.caseId)}>
+            <div className="sidebar-item-task">{t.title}</div>
+            <div className="sidebar-item-meta">
+              <span className="sidebar-item-case">{t.caseName}</span>
+              <span className="sidebar-item-days">{Math.abs(t.days)}d overdue</span>
+            </div>
+          </div>
+        ))}
+      </div>
+      {overdue.length > 8 && (
+        <button className="sidebar-show-all" onClick={() => setShowAll(!showAll)}>
+          {showAll ? 'Show less' : `View all ${overdue.length} overdue →`}
+        </button>
+      )}
+    </div>
+  );
+}
+
+// ─── Upcoming deadlines sidebar ───────────────────────────────────────────────
+function UpcomingSidebar({ cases, miscTasks, onSelectCase }) {
+  const [showAll, setShowAll] = useState(false);
+  const upcoming = collectAllTasks(cases, miscTasks).filter(t => {
+    const days = daysFromNow(t.dueDate);
+    return days !== null && days >= 0;
+  });
+  const visible = showAll ? upcoming : upcoming.slice(0, 10);
+
+  if (upcoming.length === 0) return (
+    <div className="sidebar-panel">
+      <div className="sidebar-panel-header">
+        <span className="sidebar-panel-title">📅 Upcoming Deadlines</span>
+      </div>
+      <p className="sidebar-empty-msg">No upcoming deadlines.</p>
+    </div>
+  );
+
+  return (
+    <div className="sidebar-panel">
+      <div className="sidebar-panel-header">
+        <span className="sidebar-panel-title">📅 Upcoming Deadlines</span>
+        <span className="sidebar-count">{upcoming.length}</span>
+      </div>
+      <div className="sidebar-items">
+        {visible.map(t => {
+          const days = daysFromNow(t.dueDate);
+          const level = getUrgencyLevel(days);
+          const color = getUrgencyColor(level);
+          return (
+            <div key={t.id} className="sidebar-item"
+              style={color ? { borderLeftColor: color } : {}}
+              onClick={() => t.caseId && onSelectCase(t.caseId)}>
+              <div className="sidebar-item-task">{t.title}</div>
+              <div className="sidebar-item-meta">
+                <span className="sidebar-item-case">{t.caseName}</span>
+                <span className="sidebar-item-date" style={color ? { color } : {}}>
+                  {days === 0 ? 'Today' : days === 1 ? 'Tomorrow' : `${days}d`}
+                </span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      {upcoming.length > 10 && (
+        <button className="sidebar-show-all" onClick={() => setShowAll(!showAll)}>
+          {showAll ? 'Show less' : `View all ${upcoming.length} deadlines →`}
+        </button>
+      )}
+    </div>
+  );
+}
+
+// ─── Upcoming deadlines full panel (left column) ──────────────────────────────
+function UpcomingDeadlinesFull({ cases, miscTasks, onSelectCase }) {
+  const all = collectAllTasks(cases, miscTasks);
+  const top25 = all.slice(0, 25);
+  if (top25.length === 0) return null;
+  return (
+    <div className="deadlines-panel">
+      <div className="deadlines-header">
+        <span className="deadlines-icon">🗓</span>
+        <span className="deadlines-title">Upcoming Deadlines</span>
+        <span className="task-count-badge">{top25.length} of {all.length}</span>
+      </div>
+      <div className="deadlines-list">
+        {top25.map(t => {
+          const days = daysFromNow(t.dueDate);
+          const level = getUrgencyLevel(days);
+          const color = getUrgencyColor(level);
+          return (
+            <div key={t.id} className="deadline-item"
+              style={color ? { borderLeftColor: color } : {}}
+              onClick={() => t.caseId && onSelectCase(t.caseId)}>
+              <div className="deadline-item-left">
+                <div className="deadline-task-title">{t.title}</div>
+                <div className="deadline-case-name">
+                  {t.isMisc ? '📋 Misc' : `⚖️ ${t.caseName}`}
+                  {t.critical && <span className="critical-tag" style={{ marginLeft: 6 }}>CRITICAL</span>}
+                </div>
+              </div>
+              <div className="deadline-badge-col">
+                <UrgencyBadge dueDate={t.dueDate} />
+                {(level === 'none' || level === 'normal') && (
+                  <span style={{ fontSize: 11, color: 'var(--text3)', fontFamily: 'var(--font-mono)' }}>{formatDate(t.dueDate)}</span>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ─── Misc Panel ───────────────────────────────────────────────────────────────
+function MiscPanel({ tasks, onUpdate }) {
+  const [showCompleted, setShowCompleted] = useState(false);
+  const pending = tasks.filter(t => !t.completed);
+  const completed = tasks.filter(t => t.completed);
+  const sorted = [...pending].sort((a, b) => {
+    const da = daysFromNow(a.dueDate), db = daysFromNow(b.dueDate);
+    if (da === null && db === null) return 0;
+    if (da === null) return 1; if (db === null) return -1;
+    return da - db;
+  });
+  function toggleTask(id) { onUpdate(tasks.map(t => t.id === id ? { ...t, completed: !t.completed } : t)); }
+  function deleteTask(id) { onUpdate(tasks.filter(t => t.id !== id)); }
+  function updateTask(id, changes) { onUpdate(tasks.map(t => t.id === id ? { ...t, ...changes } : t)); }
+  function addTask(data) { onUpdate([...tasks, { id: generateId(), ...data, completed: false, createdAt: todayISO() }]); }
+  if (tasks.length === 0) return null;
+  return (
+    <div className="misc-panel">
+      <div className="misc-panel-header">
+        <span className="misc-icon">📋</span>
+        <span className="misc-title">Misc / Firm Tasks</span>
+        <span className="task-count-badge">{pending.length} pending</span>
+      </div>
+      <div className="tasks-list">
+        {sorted.map(t => <TaskRow key={t.id} task={t} onToggle={toggleTask} onDelete={deleteTask} onUpdate={updateTask} />)}
+        {sorted.length === 0 && <div className="empty-tasks">🎉 All misc tasks done!</div>}
+      </div>
+      <QuickAddTask onAdd={addTask} />
+      {completed.length > 0 && (
+        <div style={{ marginTop: 8 }}>
+          <button className="toggle-completed" onClick={() => setShowCompleted(!showCompleted)}>
+            {showCompleted ? '▼' : '▶'} Completed ({completed.length})
+          </button>
+          {showCompleted && (
+            <div className="tasks-list completed-list" style={{ marginTop: 8 }}>
+              {completed.map(t => <TaskRow key={t.id} task={t} onToggle={toggleTask} onDelete={deleteTask} onUpdate={updateTask} />)}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─── Cases Table ──────────────────────────────────────────────────────────────
 function CasesTable({ cases, onSelectCase, title }) {
   const [searchQuery, setSearchQuery] = useState('');
@@ -554,7 +625,7 @@ function CasesTable({ cases, onSelectCase, title }) {
   });
 
   if (sortBy === 'urgency') {
-    filtered = filtered.sort((a, b) => {
+    filtered = [...filtered].sort((a, b) => {
       const getMin = c => {
         const days = c.tasks.filter(t => !t.completed).map(t => daysFromNow(t.dueDate)).filter(d => d !== null);
         return days.length > 0 ? Math.min(...days) : 999;
@@ -562,9 +633,9 @@ function CasesTable({ cases, onSelectCase, title }) {
       return getMin(a) - getMin(b);
     });
   } else if (sortBy === 'alpha') {
-    filtered = filtered.sort((a, b) => a.clientName.localeCompare(b.clientName));
+    filtered = [...filtered].sort((a, b) => a.clientName.localeCompare(b.clientName));
   } else if (sortBy === 'opened') {
-    filtered = filtered.sort((a, b) => new Date(b.openedDate) - new Date(a.openedDate));
+    filtered = [...filtered].sort((a, b) => new Date(b.openedDate) - new Date(a.openedDate));
   }
 
   return (
@@ -584,6 +655,7 @@ function CasesTable({ cases, onSelectCase, title }) {
           <div className="empty-icon">⚖️</div>
           <h2>{cases.length === 0 ? 'No cases yet' : 'No matches'}</h2>
           <p>{cases.length === 0 ? 'Create your first case to get started.' : 'Try a different search.'}</p>
+          {cases.length === 0 && <button className="btn-new-case large" onClick={() => {}}>+ Create First Case</button>}
         </div>
       ) : (
         <div className="cases-table-wrapper">
@@ -604,8 +676,8 @@ function CasesTable({ cases, onSelectCase, title }) {
             <tbody>
               {filtered.map(c => {
                 const pending = c.tasks.filter(t => !t.completed);
-                const completedTasks = c.tasks.filter(t => t.completed);
-                const progress = c.tasks.length > 0 ? Math.round((completedTasks.length / c.tasks.length) * 100) : 0;
+                const completedCount = c.tasks.filter(t => t.completed).length;
+                const progress = c.tasks.length > 0 ? Math.round((completedCount / c.tasks.length) * 100) : 0;
                 const sortedPending = [...pending].sort((a, b) => {
                   const da = daysFromNow(a.dueDate), db = daysFromNow(b.dueDate);
                   if (da === null && db === null) return 0;
@@ -677,8 +749,8 @@ export default function App() {
     return () => clearTimeout(timer);
   }, [data]);
 
-  function updateData(newData) { setSaved(false); setData(newData); }
-  function createCase(c) { updateData({ ...data, cases: [...data.cases, c] }); setShowNewCase(false); setSelectedCaseId(c.id); setActiveTab('dashboard'); }
+  function updateData(d) { setSaved(false); setData(d); }
+  function createCase(c) { updateData({ ...data, cases: [...data.cases, c] }); setShowNewCase(false); setSelectedCaseId(c.id); }
   function updateCase(id, changes) { updateData({ ...data, cases: data.cases.map(c => c.id === id ? { ...c, ...changes } : c) }); }
   function deleteCase(id) { updateData({ ...data, cases: data.cases.filter(c => c.id !== id) }); setSelectedCaseId(null); }
   function addTaskToMisc(task) { updateData({ ...data, miscTasks: [...(data.miscTasks || []), task] }); }
@@ -686,30 +758,40 @@ export default function App() {
   function updateMiscTasks(tasks) { updateData({ ...data, miscTasks: tasks }); }
 
   const selectedCase = data.cases.find(c => c.id === selectedCaseId);
-  const totalOverdue = data.cases.reduce((sum, c) => sum + c.tasks.filter(t => !t.completed && daysFromNow(t.dueDate) !== null && daysFromNow(t.dueDate) < 0).length, 0);
+  const totalOverdue = data.cases.reduce((sum, c) =>
+    sum + c.tasks.filter(t => !t.completed && daysFromNow(t.dueDate) !== null && daysFromNow(t.dueDate) < 0).length, 0);
+
+  const Header = () => (
+    <header className="app-header">
+      <div className="header-left">
+        <div>
+          <div className="app-logo-text">The <span className="cat">CAT-A-BASE</span></div>
+          <div className="app-logo-subtitle">Cat's Litigation Dashboard</div>
+        </div>
+        {totalOverdue > 0 && <span className="header-overdue-badge">{totalOverdue} Overdue</span>}
+      </div>
+      <div className="header-right">
+        {!saved && <span className="saving-indicator">saving...</span>}
+        {saved && <span className="saved-indicator">✓ saved</span>}
+        <button className="btn-settings" onClick={() => setShowSettings(!showSettings)}>⚙️</button>
+        <button className="btn-new-case" onClick={() => setShowNewCase(true)}>+ New Case</button>
+      </div>
+    </header>
+  );
 
   // Case detail view
   if (selectedCase) {
     return (
       <div className="app">
-        <header className="app-header">
-          <div className="header-left">
-            <div>
-              <div className="app-logo-text">The <span className="cat">CAT-A-BASE</span></div>
-              <div className="app-logo-subtitle">Cat's Litigation Dashboard</div>
-            </div>
-          </div>
-          <div className="header-right">
-            {!saved && <span className="saving-indicator">saving...</span>}
-            {saved && <span className="saved-indicator">✓ saved</span>}
-          </div>
-        </header>
+        <Header />
         <nav className="nav-bar">
           <button className="nav-tab" onClick={() => setSelectedCaseId(null)}>← Dashboard</button>
         </nav>
         <main className="app-main">
-          <CaseDetail caseData={selectedCase} onUpdate={changes => updateCase(selectedCase.id, changes)}
-            onBack={() => setSelectedCaseId(null)} onDelete={() => deleteCase(selectedCase.id)} />
+          <CaseDetail caseData={selectedCase}
+            onUpdate={changes => updateCase(selectedCase.id, changes)}
+            onBack={() => setSelectedCaseId(null)}
+            onDelete={() => deleteCase(selectedCase.id)} />
         </main>
         <FloatingCaptureButton onClick={() => setShowCapture(true)} />
         {showCapture && <GlobalCaptureModal cases={data.cases} onClose={() => setShowCapture(false)} onAddToCase={addTaskToCase} onAddToMisc={addTaskToMisc} />}
@@ -719,39 +801,23 @@ export default function App() {
 
   return (
     <div className="app">
-      {/* Top header */}
-      <header className="app-header">
-        <div className="header-left">
-          <div>
-            <div className="app-logo-text">The <span className="cat">CAT-A-BASE</span></div>
-            <div className="app-logo-subtitle">Cat's Litigation Dashboard</div>
-          </div>
-          {totalOverdue > 0 && <span className="header-overdue-badge">{totalOverdue} Overdue</span>}
-        </div>
-        <div className="header-right">
-          {!saved && <span className="saving-indicator">saving...</span>}
-          {saved && <span className="saved-indicator">✓ saved</span>}
-          <button className="btn-settings" onClick={() => setShowSettings(!showSettings)} title="Settings">⚙️</button>
-          <button className="btn-new-case" onClick={() => setShowNewCase(true)}>+ New Case</button>
-        </div>
-      </header>
+      <Header />
 
-      {/* Black nav tabs */}
       <nav className="nav-bar">
         {[
-          { id: 'dashboard', label: 'Dashboard' },
-          { id: 'cases',     label: 'Cases' },
-          { id: 'litigation',label: 'Litigation' },
-          { id: 'prelit',    label: 'Pre-Lit' },
+          { id: 'dashboard',  label: 'Dashboard' },
+          { id: 'cases',      label: 'Cases' },
+          { id: 'litigation', label: 'Litigation' },
+          { id: 'prelit',     label: 'Pre-Lit' },
         ].map(tab => (
-          <button key={tab.id} className={`nav-tab ${activeTab === tab.id ? 'active' : ''}`}
+          <button key={tab.id}
+            className={`nav-tab ${activeTab === tab.id ? 'active' : ''}`}
             onClick={() => setActiveTab(tab.id)}>
             {tab.label}
           </button>
         ))}
       </nav>
 
-      {/* Settings bar */}
       {showSettings && (
         <div className="settings-bar">
           <div className="settings-content">
@@ -773,32 +839,33 @@ export default function App() {
       )}
 
       <main className="app-main">
-        {/* ── DASHBOARD TAB ── */}
         {activeTab === 'dashboard' && (
-          <>
-            <div className="dashboard-capture-bar">
-              <button className="dashboard-capture-btn" onClick={() => setShowCapture(true)}>
-                <span className="dashboard-capture-plus">+</span>
-                <span>Quick capture a task...</span>
-              </button>
+          <div className="dashboard-layout">
+            {/* Left 2/3 */}
+            <div className="dashboard-main">
+              <div className="dashboard-capture-bar">
+                <button className="dashboard-capture-btn" onClick={() => setShowCapture(true)}>
+                  <span className="dashboard-capture-plus">+</span>
+                  <span>Quick capture a task...</span>
+                </button>
+              </div>
+              <UpcomingDeadlinesFull cases={data.cases} miscTasks={data.miscTasks} onSelectCase={setSelectedCaseId} />
+              <MiscPanel tasks={data.miscTasks || []} onUpdate={updateMiscTasks} />
             </div>
-            <AlertsPanel cases={data.cases} />
-            <UpcomingDeadlines cases={data.cases} miscTasks={data.miscTasks} onSelectCase={id => { setSelectedCaseId(id); }} />
-            <MiscPanel tasks={data.miscTasks || []} onUpdate={updateMiscTasks} />
-          </>
+            {/* Right 1/3 sidebar */}
+            <div className="dashboard-sidebar">
+              <OverdueSidebar cases={data.cases} onSelectCase={setSelectedCaseId} />
+              <UpcomingSidebar cases={data.cases} miscTasks={data.miscTasks} onSelectCase={setSelectedCaseId} />
+            </div>
+          </div>
         )}
 
-        {/* ── CASES TAB (all, alphabetical) ── */}
         {activeTab === 'cases' && (
           <CasesTable cases={data.cases} onSelectCase={setSelectedCaseId} title="All Cases" />
         )}
-
-        {/* ── LITIGATION TAB ── */}
         {activeTab === 'litigation' && (
           <CasesTable cases={data.cases.filter(c => c.type === 'litigation')} onSelectCase={setSelectedCaseId} title="Litigation Cases" />
         )}
-
-        {/* ── PRE-LIT TAB ── */}
         {activeTab === 'prelit' && (
           <CasesTable cases={data.cases.filter(c => c.type === 'prelitigation')} onSelectCase={setSelectedCaseId} title="Pre-Litigation Cases" />
         )}
